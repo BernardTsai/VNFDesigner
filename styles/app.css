@@ -1,0 +1,716 @@
+body {
+  min-height: 800px;
+  min-width:  1024px;
+  width: auto !important;
+}
+
+
+body {
+  background-color: white;
+  color:            black;
+  font-size:        14px;
+  font-family:      sans-serif;
+  font:             12px Arial;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently */
+}
+
+div, input, select, textarea {
+  box-sizing: border-box;
+}
+
+input, select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input, select {
+  border: none;
+  border-bottom: 1px solid darkgrey;
+}
+
+input:required, select:required {
+  border-bottom: 1px solid red;
+}
+
+input[readonly] {
+  border-bottom: none;
+}
+
+select {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA3XAAAN1wFCKJt4AAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAAAe0lEQVQYGWWNQQqAIBBFm6K1eBbpAOomWhQUXiaKgg7mtlNJ81PEaEDm+b7jVFUsSr1s0Sml2mTrIn0ZWS2lHLTWM4fBOdfggNktQogeQ2SMOViMuKCYJ3YbI+XdLE4iuvEghNB57y8wKu/myd1au0b9zfJPRfhzpcj8ABbkF5o44buYAAAAAElFTkSuQmCC') no-repeat 188px 4px;
+}
+
+select.valid {
+  background-color: white;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#copyright {
+  position:  absolute;
+  right:     0px;
+  bottom:    0px;
+  padding:   8px;
+  font-size: 8px;
+  z-index:   1000;
+}
+
+#copyright a {
+  text-decoration: none;
+  color:           #eee;
+  padding-right:   32px;
+}
+
+#copyright a:hover {
+  color:           #888;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#app {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+}
+
+#appheader {
+  position:         absolute;
+  left:             0px;
+  right:            0px;
+  top:              0px;
+  height:           56px;
+  line-height:      32px;
+  vertical-align:   middle;
+  background-color: lightgrey;
+  border-bottom:    1px solid grey;
+  min-width:        1024px;
+}
+
+
+#appnavigation {
+  position:    absolute;
+  left:        0px;
+  width:       320px;
+  bottom:      0px;
+  top:         56px;
+  overflow-y: scroll;
+
+  border-right: 1px solid grey;
+  min-height:   768px;
+}
+
+#appheader .tabs {
+  position:      absolute;
+  left:          0px;
+  width:         320px;
+  top:           32px;
+  height:        24px;
+  border-bottom: 1px solid grey;
+}
+
+#appheader .tabs div {
+  float:                    left;
+  line-height:              20px;
+  padding-left:             4px;
+  padding-right:            4px;
+  border-top-left-radius:   8px;
+  border-top-right-radius:  8px;
+  cursor:                   pointer;
+  background-color:         lightgrey;
+  margin-top:               2px;
+  border-left:              1px solid grey;
+  border-right:             1px solid grey;
+  border-top:               1px solid grey;
+  margin-left:              1px;
+}
+
+#appheader .tabs div.active {
+  background-color:         grey;
+  border-left:              1px solid grey;
+  border-right:             1px solid grey;
+  border-top:               1px solid grey;
+  color:                    white;
+}
+
+#appheader .tabs div.button {
+  float:            right;
+  margin:           4px;
+  height:           16px;
+  font-size:        8px;
+  line-height:      16px;
+  background-color: darkgrey;
+  padding-right:    4px;
+  border:           none;
+  border-radius:    8px;
+  vertical-align:   middle;
+  text-align:       center;
+}
+
+#appheader .tabs div.button:hover {
+  background-color: darkgrey;
+  color:            white;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appnavigation .flavors,
+#appnavigation .images,
+#appnavigation .networks,
+#appnavigation .components {
+  position:      absolute;
+  left:          0px;
+  right:         0px;
+  top:           0px;
+  bottom:        0px;
+}
+
+#appnavigation .images     .imageitem,
+#appnavigation .flavors    .flavoritem,
+#appnavigation .networks   .networkitem,
+#appnavigation .components .componentitem {
+  display:       block;
+  padding-left:  8px;
+  height:        32px;
+  line-height:   32px;
+  border-bottom: 1px solid grey;
+}
+
+#appnavigation .images     .imageitem:hover,
+#appnavigation .flavors    .flavoritem:hover,
+#appnavigation .networks   .networkitem:hover,
+#appnavigation .components .componentitem:hover {
+  background-color: lightblue;
+}
+
+#appnavigation .images     .imageitem     .name,
+#appnavigation .flavors    .flavoritem    .name,
+#appnavigation .networks   .networkitem   .name,
+#appnavigation .components .componentitem .name {
+  display:       inline-block;
+  height:        32px;
+  line-height:   32px;
+  width:         280px;
+  text-overflow: ellipsis;
+  overflow:      hidden;
+  white-space:   nowrap;
+}
+
+#appnavigation .images     .imageitem     .button,
+#appnavigation .flavors    .flavoritem    .button,
+#appnavigation .networks   .networkitem   .button,
+#appnavigation .components .componentitem .button {
+  float:            right;
+  margin-top:       8px;
+  margin-right:     4px;
+  height:           16px;
+  width:            16px;
+  font-size:        8px;
+  line-height:      16px;
+  background-color: darkgrey;
+  border:           none;
+  border-radius:    8px;
+  vertical-align:   middle;
+  text-align:       center;
+}
+
+#appnavigation .images     .imageitem     .button:hover,
+#appnavigation .flavors    .flavoritem    .button:hover,
+#appnavigation .networks   .networkitem   .button:hover,
+#appnavigation .components .componentitem .button:hover {
+  background-color: darkgrey;
+  color:            white;
+}
+/*----------------------------------------------------------------------------*/
+
+#appdetail {
+  position:    absolute;
+  left:        320px;
+  right:       0px;
+  bottom:      0px;
+  top:         56px;
+  overflow-y: scroll;
+  min-height:  744px;
+  min-width:   704px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appheader .logo {
+  position:       absolute;
+  top:            4px;
+  left:           4px;
+  height:         32px;
+  line-height:    32px;
+  padding-left:   4px;
+  padding-right:  4px;
+  vertical-align: middle;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  font-size:      24px;
+  color:          #aaa;
+}
+
+#appheader .label {
+  position:       absolute;
+  top:            32px;
+  left:           320px;
+  height:         20px;
+  line-height:    20px;
+  padding-left:   4px;
+  padding-right:  4px;
+  vertical-align: middle;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  font-size:      20px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appheader .buttons {
+  position:       absolute;
+  right:          0px;
+  top:            4px;
+  height:         20px;
+  padding-right:  32px;
+}
+
+#appheader .buttons div {
+  float:          left;
+  line-height:    20px;
+  padding-left:   4px;
+  padding-right:  4px;
+  margin-left:    2px;
+  margin-right:   2px;
+  border-radius:  4px;
+  cursor:         pointer;
+}
+
+#appheader .buttons div:last-child {
+  padding-right:   4px;
+}
+
+#appheader .buttons div.active {
+  background-color: blue;
+  color:            white;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#componentform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#componentform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#componentform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#componentform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#componentform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#componentform .line label.top {
+  width:       200px;
+}
+
+
+#componentform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#componentform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#networkform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#networkform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#networkform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#networkform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#networkform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#networkform .line label.top {
+  width:       200px;
+}
+
+
+#networkform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#networkform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#flavorform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#flavorform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#flavorform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#flavorform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#flavorform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#flavorform .line label.top {
+  width:       200px;
+}
+
+
+#flavorform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#flavorform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#imageform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#imageform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#imageform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#imageform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#imageform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#imageform .line label.top {
+  width:       200px;
+}
+
+
+#imageform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#imageform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenantform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#tenantform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#tenantform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#tenantform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#tenantform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#tenantform .line label.top {
+  width:       200px;
+}
+
+#tenantform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#tenantform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#exportform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#exportform .header {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  height:   32px;
+  padding:  8px;
+
+  line-height: 32px;
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#exportform .header .format {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#exportform .header .format select {
+  display: inline-block;
+  width:   200px;
+}
+
+#exportform .header .button {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#exportform .line {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      32px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow:  scroll;
+}
+
+#exportform .line textarea {
+  width:     100%;
+  height:    100%;
+  font-size: 8px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#importform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#importform .header {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  height:   32px;
+  padding:  8px;
+
+  line-height: 32px;
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#importform .header .button {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#importform .line {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      32px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow:  scroll;
+}
+
+#importform .line textarea {
+  width:     100%;
+  height:    100%;
+  font-size: 8px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#modal {
+    position:         fixed;
+    left:             0;
+    top:              0;
+    width:            100%;
+    height:           100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition:       visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+#modal .content {
+    position:         absolute;
+    top:              25%;
+    left:             50%;
+    transform:        translate(-50%, -50%);
+    background-color: white;
+    padding:          1rem 1.5rem;
+    width:            24rem;
+    border-radius:    0.5rem;
+}
+
+#modal .close {
+    float:            right;
+    width:            1.5rem;
+    line-height:      1.5rem;
+    text-align:       center;
+    cursor:           pointer;
+    border-radius:    0.25rem;
+    background-color: lightgray;
+}
+
+#modal .close:hover {
+    background-color: darkgray;
+}
