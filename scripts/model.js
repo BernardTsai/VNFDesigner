@@ -1,51 +1,69 @@
 var data = `
-vnf:        VNF
+vnf:        Example
 tenant:     Tenant
 datacenter: datacenter
 version:    1.0.0
 flavors:
-  - { index: "0", name: "m1.tiny",   vcpu: "1", ram:   "512", disk:   "0", special: "a" }
-  - { index: "1", name: "m1.small",  vcpu: "1", ram:  "2048", disk:  "20", special: "b" }
-  - { index: "2", name: "m1.medium", vcpu: "2", ram:  "4096", disk:  "40", special: "c" }
-  - { index: "3", name: "m1.large",  vcpu: "4", ram:  "8192", disk:  "80", special: "d" }
-  - { index: "4", name: "m1.xlarge", vcpu: "8", ram: "16384", disk: "160", special: "e" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b0", name: "none",      vcpu: 0, ram:     0, disk:   0, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b1", name: "m1.tiny",   vcpu: 1, ram:   512, disk:   0, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b2", name: "m1.small",  vcpu: 1, ram:  2048, disk:  20, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b3", name: "m1.medium", vcpu: 2, ram:  4096, disk:  40, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b4", name: "m1.large",  vcpu: 4, ram:  8192, disk:  80, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b5", name: "m1.xlarge", vcpu: 8, ram: 16384, disk: 160, special: "" }
 images:
-  - { index: "0", name: "CentOS-6" }
-  - { index: "1", name: "CentOS-7" }
-  - { index: "2", name: "Ubuntu-14.04" }
-  - { index: "3", name: "Ubuntu-17.04" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e0", name: "none",         disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e1", name: "CentOS-6",     disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e2", name: "CentOS-7",     disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e3", name: "Ubuntu-14.04", disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e4", name: "Ubuntu-17.04", disk: "qcow2", container: "bare", special: "", url: "" }
 networks:
-  - { index: "0",  name: "oam", ipv4: "", ipv6: "", route: "", special: "" }
-  - { index: "1",  name: "svc", ipv4: "", ipv6: "", route: "", special: "" }
-  - { index: "2",  name: "m2m", ipv4: "", ipv6: "", route: "", special: "" }
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a0",  name: "oam", ipv4: "", ipv6: "", route: "", special: "" }
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a1",  name: "svc", ipv4: "", ipv6: "", route: "", special: "" }
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a2",  name: "m2m", ipv4: "", ipv6: "", route: "", special: "" }
 components:
-  - { index: "0", name: "web", placement: "ext", flavor: "m1.small", image: "CentOS-6", min: 2, size: 3, max: 5,
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f0",
+      name: "client", placement: "other", flavor: "none", image: "none", min: 1, size: 1, max: 1,
       volumes: [],
-      networks: [{name: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {name: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}, {name: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
+      interfaces: [{network: "svc", ipv4: "0.0.0.0/0", ipv6: "", attributes: ""}],
+      services: [],
+      dependencies: [{component: "web", service: "http", network: "svc"}]}
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f1",
+      name: "web", placement: "ext", flavor: "m1.small", image: "CentOS-6", min: 2, size: 3, max: 5,
+      volumes: [],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}, {network: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
       services: [{name: "http", network: "svc", protocol: "tcp", range: "80,443"}, {name: "ssh", network: "oam", protocol: "tcp", range: "22"}],
       dependencies: [{component: "database", service: "mysql", network: "m2m"}]}
-  - { index: "1", name: "database", placement: "int", flavor: "m1.small", image: "CentOS-6", min: 3, size: 3, max: 3,
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f2",
+      name: "database", placement: "int", flavor: "m1.small", image: "CentOS-6", min: 3, size: 3, max: 3,
       volumes: [{name: "data1", size: 100, type: "INT", attributes: ""}, {name: "data2", size: 2200, type: "INT", attributes: ""}],
-      networks: [{name: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {name: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
       services: [{name: "mysql", network: "m2m", protocol: "tcp", range: "3306"}, {name: "ssh", network: "oam", protocol: "tcp", range: "22"}],
       dependencies: []}
-  - { index: "2", name: "jumphost", placement: "mgmt", flavor: "m1.small", image: "CentOS-6", min: 2, size: 2, max: 2,
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f3",
+      name: "jumphost", placement: "mgmt", flavor: "m1.small", image: "CentOS-6", min: 2, size: 2, max: 2,
       volumes: [],
-      networks: [{name: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {name: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}],
       services: [{name: "ssh", network: "svc", protocol: "tcp", range: "22"}],
       dependencies: [{component: "web", service: "ssh", network: "oam"}, {component: "database", service: "ssh", network: "oam"}]}
 `
 
-var model = jsyaml.safeLoad(data);
+//------------------------------------------------------------------------------
+
+var current = jsyaml.safeLoad(data);
+var target  = jsyaml.safeLoad(data);
+var model   = current;
 
 //------------------------------------------------------------------------------
 
-var configuration = {
-	view:    "Tenant",
-  type:    "",
-  entity:  null,
-  export:  "Canonical",
-  modal:   ""
+function setModel(object) {
+  model.vnf        = object.vnf
+  model.tenant     = object.tenant
+  model.version    = object.version
+  model.datacenter = object.datacenter
+  model.flavors    = object.flavors
+  model.images     = object.images
+  model.networks   = object.networks
+  model.components = object.components
 }
 
 //------------------------------------------------------------------------------
@@ -60,46 +78,90 @@ function uuidv4() {
 //------------------------------------------------------------------------------
 
 function addFlavor() {
-  var index = uuidv4();
+  var uuid = uuidv4();
+  var nr   = model.flavors.length + 1;
 
-  model.flavors.push( { index: index, name: "flavor-" + index } );
+  model.flavors.push( { uuid: uuid, name: "flavor-" + nr } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteFlavor(flavor) {
+  var index = model.flavors.indexOf(flavor);
+
+  if (index > -1) { model.flavors.splice(index,1) }
 }
 
 //------------------------------------------------------------------------------
 
 function addImage() {
-  var index = uuidv4();
+  var uuid = uuidv4();
+  var nr   = model.images.length + 1;
 
-  model.images.push( { index: index, name: "image-" + index } );
+  model.images.push( { uuid: uuid, name: "image-" + nr, disk: "qcow2", container: "bare", special: "", url: "" } );
 }
 
+//------------------------------------------------------------------------------
+
+function deleteImage(image) {
+  var index = model.images.indexOf(image);
+
+  if (index > -1) { model.images.splice(index,1) }
+}
 
 //------------------------------------------------------------------------------
 
 function addNetwork() {
-  var index = uuidv4();
+  var uuid = uuidv4();
+  var nr   = model.networks.length + 1;
 
-  model.networks.push( { index: index, name: "network-" + index, ipv4: "", ipv6: "", route: "", special: "" } );
+  model.networks.push( { uuid: uuid, name: "net-" + nr, ipv4: "", ipv6: "", route: "", special: "" } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteNetwork(network) {
+  var index = model.networks.indexOf(network);
+
+  if (index > -1) { model.networks.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function hasComponent(name) {
+  for (var comp of model.components) {
+    if (comp.name === name) { return comp }
+  }
+  return null;
 }
 
 //------------------------------------------------------------------------------
 
 function addComponent() {
-  var index = uuidv4();
+  var uuid = uuidv4();
+  var nr   = model.components.length + 1;
 
   model.components.push({
-    index: index, name: "component-" + index,
-    placement: "", flavor: "", image: "", min: 1, max: 1, size: 1,
-    volumes: [], networks: [], services: [], dependencies: [] } );
+    uuid: uuid, name: "comp-" + nr,
+    placement: "mgmt", flavor: "none", image: "none", min: 1, max: 1, size: 1,
+    volumes: [], interfaces: [], services: [], dependencies: [] } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteComponent(component) {
+  var index = model.components.indexOf(component);
+
+  if (index > -1) { model.components.splice(index,1) }
 }
 
 //------------------------------------------------------------------------------
 
 function addComponentVolume(component) {
-  var index = uuidv4();
+  var nr = component.volumes.length + 1;
 
   component.volumes.push({
-    name: "volume-" + index, size: "100",
+    name: "volume-" + nr, size: 100,
     type: component.placement.toUpperCase(), attributes:  ""});
 }
 
@@ -113,28 +175,36 @@ function delComponentVolume(component,volume) {
 
 //------------------------------------------------------------------------------
 
-function addComponentNetwork(component) {
-  var index = uuidv4();
+function addComponentInterface(component,network="") {
+  var name = (network !== "" ? network : "net-" + (component.interfaces.length + 1));
 
-  component.networks.push({
-    name: "network-" + index, ipv4: "", ipv6: "", attributes:  ""});
+  component.interfaces.push({network: network, ipv4: "", ipv6: "", attributes:  ""});
 }
 
 //------------------------------------------------------------------------------
 
-function delComponentNetwork(component,network) {
-  var index = component.networks.indexOf(network);
+function delComponentInterface(component,interface) {
+  var index = component.interfaces.indexOf(interface);
 
-  if (index > -1) { component.networks.splice(index,1) }
+  if (index > -1) { component.interfaces.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function hasComponentInterface(component,network) {
+  for (var interface of component.interfaces) {
+    if (interface.network === network) {return interface;}
+  }
+  return null;
 }
 
 //------------------------------------------------------------------------------
 
 function addComponentService(component) {
-  var index = uuidv4();
+  var nr = component.services.length + 1;
 
   component.services.push({
-    name: "service-" + index, network: "", protocol: "tcp", range:  ""});
+    name: "svc-" + nr, network: "", protocol: "tcp", range:  "0-65535"});
 }
 
 //------------------------------------------------------------------------------
@@ -148,10 +218,10 @@ function delComponentService(component,service) {
 //------------------------------------------------------------------------------
 
 function addComponentDependency(component) {
-  var index = uuidv4();
+  var nr = component.dependencies.length + 1;
 
   component.dependencies.push({
-    component: "dependency-" + index, service: "",network: ""});
+    component: "dep-" + nr, service: "",network: ""});
 }
 
 //------------------------------------------------------------------------------
@@ -160,51 +230,6 @@ function delComponentDependency(component,dependency) {
   var index = component.dependencies.indexOf(dependency);
 
   if (index > -1) { component.dependencies.splice(index,1) }
-}
-
-//------------------------------------------------------------------------------
-
-function deleteFlavor(flavor) {
-  var index = model.flavors.indexOf(flavor);
-
-  if (index > -1) { model.flavors.splice(index,1) }
-}
-
-//------------------------------------------------------------------------------
-
-function deleteImage(image) {
-  var index = model.images.indexOf(image);
-
-  if (index > -1) { model.images.splice(index,1) }
-}
-
-//------------------------------------------------------------------------------
-
-function deleteNetwork(network) {
-  var index = model.networks.indexOf(network);
-
-  if (index > -1) { model.networks.splice(index,1) }
-}
-//------------------------------------------------------------------------------
-
-function deleteComponent(component) {
-  var index = model.components.indexOf(component);
-
-  if (index > -1) { model.components.splice(index,1) }
-}
-
-//------------------------------------------------------------------------------
-
-function import_model() {
-  var tmpl   = tosca
-  var result = Mustache.render(tosca, model);
-  console.log(result)
-}
-
-//------------------------------------------------------------------------------
-
-function export_model() {
-
 }
 
 //------------------------------------------------------------------------------

@@ -1,71 +1,50 @@
-//------------------------------------------------------------------------------
-
 var schema = {
-  //"$schema":     "http://tsai.eu/vnfd-00-01-00/schema#",
+  // "$schema":     "http://tsai.eu/vnfd-00-01-00/schema#",
   "title":       "VNF Desciptor",
   "description": "A simple VNF descriptor",
   "type":        "object",
-
+  "required":    ["vnf", "tenant", "version", "datacenter", "flavors", "images", "networks", "components"],
   "properties": {
 
-    "vnf": {
-      "description": "The unique identifier for a virtual network function",
-      "type":        "string"
-    },
+    "vnf": { "type": "string", "minLength": 1,
+      "description": "The unique identifier for a virtual network function" },
 
-    "tenant": {
-      "description": "The name of the virtual data center",
-      "type":        "string"
-    },
+    "tenant": { "type": "string", "minLength": 1,
+      "description": "The name of the virtual data center" },
 
-    "version": {
-      "description": "Semantic version of the VNF descriptor",
-      "type":        "string"
-    },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\.\\d+$",
+      "description": "Semantic version of the VNF descriptor" },
 
-    "datacenter": {
-      "description": "The name of the virtual data center",
-      "type":        "string"
-    },
+    "datacenter": { "type": "string", "minLength": 1,
+      "description": "The name of the virtual data center" },
 
     "flavors": {
       "description": "The sizing of virtual servers",
       "type":        "array",
       "items": {
-        "title": "Flavor",
-        "type":  "object",
+        "title":    "Flavor",
+        "type":     "object",
+        "required": ["uuid","name","vcpu","ram","disk","special"],
         "properties": {
-          "index": {
-            "description": "Unique identifier of the flavor",
-            "type":        "string"
-          },
 
-          "name": {
-            "description": "Name of the flavor",
-            "type":        "string"
-          },
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the flavor" },
 
-          "vcpu": {
-            "description": "Number of virtual core processing units as string",
-            "type":        "string"
-          },
+          "name": { "type": "string",
+            "description": "Name of the flavor" },
 
-          "ram": {
-            "description": "Size of memory in megabytes as string",
-            "type":        "string"
-          },
+          "vcpu": { "type": "number",
+            "description": "Number of virtual core processing units as string" },
 
-          "disk": {
-            "description": "Size of local disk in gigabytes as string",
-            "type":        "string"
-          },
+          "ram": { "type": "number",
+            "description": "Size of memory in megabytes as string" },
 
-          "special": {
-            "description": "Additional special attributes",
-            "type":        "string"
-          }
-        },
-        "required": ["index","name","vcpu","ram","disk","special"]
+          "disk": { "type": "number",
+            "description": "Size of local disk in gigabytes as string" },
+
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
       }
     },
 
@@ -73,20 +52,29 @@ var schema = {
       "description": "The operating systems for virtual servers",
       "type":        "array",
       "items": {
-        "title": "Image",
-        "type":  "object",
+        "title":    "Image",
+        "type":     "object",
+        "required": ["uuid","name","disk","container"],
         "properties": {
-          "index": {
-            "description": "Unique identifier of the image",
-            "type":        "string"
-          },
 
-          "name": {
-            "description": "Name of the image",
-            "type":        "string"
-          }
-        },
-        "required": ["index","name"]
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the image" },
+
+          "name": { "type": "string",
+            "description": "Name of the image" },
+
+          "disk": { "type": "string", "enum": ['aki','ami','ari','iso','qcow2','raw','vdi','vhd','vhdx','vmdk'],
+            "description": "Disk format of the image" },
+
+          "container": { "type": "string", "enum": ['aki','ami','ari','bare','docker','ova','ovf'],
+            "description": "Container format of the image" },
+
+          "url": { "type": "string",
+            "description": "URL for the image" },
+
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
       }
     },
 
@@ -94,35 +82,25 @@ var schema = {
       "description": "The virtual networks",
       "type":        "array",
       "items": {
-        "title": "Network",
-        "type":  "object",
+        "title":    "Network",
+        "type":     "object",
+        "required": ["uuid","ipv4","ipv6","special"],
         "properties": {
-          "index": {
-            "description": "Unique identifier of the virtual network",
-            "type":        "string"
-          },
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the virtual network" },
 
-          "name": {
-            "description": "Name of the virtual network",
-            "type":        "string"
-          },
+          "name": { "type": "string",
+            "description": "Name of the virtual network" },
 
-          "ipv4": {
-            "description": "IPv4 attributes of the virtual network",
-            "type":        "string"
-          },
+          "ipv4": { "type": "string",
+            "description": "IPv4 attributes of the virtual network" },
 
-          "ipv6": {
-            "description": "IPv6 attributes of the virtual network",
-            "type":        "string"
-          },
+          "ipv6": { "type": "string",
+            "description": "IPv6 attributes of the virtual network" },
 
-          "special": {
-            "description": "Additional special attributes",
-            "type":        "string"
-          }
-        },
-        "required": ["index","ipv4","ipv6","special"]
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
       }
     },
 
@@ -130,78 +108,56 @@ var schema = {
       "description": "The virtual servers",
       "type":        "array",
       "items": {
-        "title": "Component",
-        "type":  "object",
+        "title":    "Component",
+        "type":     "object",
+        "required": ["uuid","name","placement","flavor","image","min","size","max","interfaces","volumes","services","dependencies"],
         "properties": {
-          "index": {
-            "description": "Unique identifier of the virtual server",
-            "type":        "string"
-          },
 
-          "name": {
-            "description": "Name of the virtual server",
-            "type":        "string"
-          },
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the virtual server" },
 
-          "placement": {
-            "description": "Placement of the virtual server",
-            "type":        "string",
-            "enum":        ["other", "ext", "int", "mgmt"]
-          },
+          "name": { "type": "string",
+            "description": "Name of the virtual server" },
 
-          "flavor": {
-            "description": "Name of the virtual server sizing",
-            "type":        "string"
-          },
+          "placement": { "type": "string", "enum": ["other", "ext", "int", "mgmt"],
+            "description": "Placement of the virtual server" },
 
-          "image": {
-            "description": "Name of the operating system",
-            "type":        "string"
-          },
+          "flavor": { "type": "string",
+            "description": "Name of the virtual server sizing" },
 
-          "min": {
-            "description": "Minimum size of the cluster",
-            "type":        "number"
-          },
+          "image": { "type": "string",
+            "description": "Name of the operating system" },
 
-          "size": {
-            "description": "Default size of the cluster",
-            "type":        "number"
-          },
+          "min": { "type": "number",
+            "description": "Minimum size of the cluster" },
 
-          "max": {
-            "description": "Maximum size of the cluster",
-            "type":        "number"
-          },
+          "size": { "type": "number",
+            "description": "Default size of the cluster" },
 
-          "networks": {
+          "max": { "type": "number",
+            "description": "Maximum size of the cluster" },
+
+          "interfaces": {
             "description": "The interfaces to virtual networks",
             "type":        "array",
             "items": {
-              "title": "Component Network",
-              "type":  "object",
+              "title":    "Component Interface",
+              "type":     "object",
+              "required": ["network","ipv4","ipv6","attributes"],
               "properties": {
-                "name": {
-                  "description": "Name of the virtual network",
-                  "type":        "string"
-                },
 
-                "ipv4": {
-                  "description": "IPv4 attributes of the interface",
-                  "type":        "string"
-                },
+                "network": { "type": "string",
+                  "description": "Name of the virtual network" },
 
-                "ipv6": {
-                  "description": "IPv6 attributes of the interface",
-                  "type":        "string"
-                },
+                "ipv4": { "type": "string",
+                  "description": "IPv4 attributes of the interface" },
 
-                "attributes": {
-                  "description": "Additional special attributes",
-                  "type":        "string"
-                }
-              },
-              "required": ["name","ipv4","ipv6","attributes"]
+                "ipv6": { "type": "string",
+                  "description": "IPv6 attributes of the interface" },
+
+                "attributes": { "type": "string",
+                  "description": "Additional special attributes" }
+              }
             }
           },
 
@@ -209,31 +165,23 @@ var schema = {
             "description": "The attached virtual block storage",
             "type":        "array",
             "items": {
-              "title": "Component Network",
+              "title": "Component Volume",
               "type":  "object",
+              "required": ["name","size","type","attributes"],
               "properties": {
-                "name": {
-                  "description": "Name of the virtual network",
-                  "type":        "string"
-                },
 
-                "size": {
-                  "description": "Size of the block storage in gigabyte",
-                  "type":        "number"
-                },
+                "name": { "type": "string",
+                  "description": "Name of the virtual network" },
 
-                "type": {
-                  "description": "Name of block storage pool",
-                  "type":        "string",
-                  "enum":        ["EXT", "INT"]
-                },
+                "size": { "type": "number",
+                  "description": "Size of the block storage in gigabyte" },
 
-                "attributes": {
-                  "description": "Additional special attributes",
-                  "type":        "string"
-                }
-              },
-              "required": ["name","size","type","attributes"]
+                "type": { "type": "string", "enum": ["EXT", "INT"],
+                  "description": "Name of block storage pool" },
+
+                "attributes": { "type": "string",
+                  "description": "Additional special attributes" }
+              }
             }
           },
 
@@ -241,31 +189,23 @@ var schema = {
             "description": "The exposed services",
             "type":        "array",
             "items": {
-              "title": "Component Network",
-              "type":  "object",
+              "title":    "Component Service",
+              "type":     "object",
+              "required": ["name","network","protocol","range"],
               "properties": {
-                "name": {
-                  "description": "Name of the service",
-                  "type":        "string"
-                },
 
-                "network": {
-                  "description": "The virtual network via which the service is exposed",
-                  "type":        "string"
-                },
+                "name": { "type": "string",
+                  "description": "Name of the service" },
 
-                "protocol": {
-                  "description": "The service protocol",
-                  "type":        "string",
-                  "enum":        ["tcp", "udp", "icmp"]
-                },
+                "network": { "type": "string",
+                  "description": "The virtual network via which the service is exposed" },
 
-                "range": {
-                  "description": "Port range",
-                  "type":        "string"
-                }
-              },
-              "required": ["name","network","protocol","range"]
+                "protocol": { "type": "string", "enum": ["tcp", "udp", "icmp"],
+                  "description": "The service protocol" },
+
+                "range": { "type": "string", "minimum": 1,
+                  "description": "Port range" }
+              }
             }
           },
 
@@ -273,36 +213,26 @@ var schema = {
             "description": "The dependencies to services provided by other componenntse",
             "type":        "array",
             "items": {
-              "title": "Component Network",
-              "type":  "object",
+              "title":      "Component Network",
+              "type":       "object",
+              "required":   ["component","service","network"],
               "properties": {
 
-                "component": {
-                  "description": "Name of the other component",
-                  "type":        "string"
-                },
+                "component": { "type": "string",
+                  "description": "Name of the other component"},
 
-                "service": {
-                  "description": "The name of the service provided by the other component",
-                  "type":        "string"
-                },
+                "service": { "type": "string",
+                  "description": "The name of the service provided by the other component"},
 
-                "network": {
-                  "description": "The virtual network via which the service is consumed",
-                  "type":        "string"
-                }
-              },
-              "required": ["component","service","network"]
+                "network": { "type": "string",
+                  "description": "The virtual network via which the service is consumed" }
+              }
             }
           }
-        },
-        "required": ["index","name","placement","flavor","image","min","size","max","networks","volumes","services","dependencies"]
+        }
       }
     }
-
-  },
-
-  "required": ["vnf", "tenant", "version", "datacenter", "flavors", "images", "networks", "components"]
+  }
 }
 
 //------------------------------------------------------------------------------
@@ -313,11 +243,9 @@ function validate_schema(object) {
   var valid  = verify(object);
 
   if (!valid) {
-    msg = "Schema error\n" +
-          "Path: "   + verify.errors[0].dataPath + "\n" +
-          "Reason: " + verify.errors[0].message;
+    setFocus(verify.errors[0].dataPath)
 
-    return msg;
+    return "Schema error:\nfield " + verify.errors[0].message;
   }
 
   return '';
@@ -341,58 +269,69 @@ function validate_xref(object) {
   }
 
   // check flavors, images, networks and dependencies
-  for ( var component of object.components ) {
+  for ( var index =  0; index < object.components.length; index++ ) {
+    component = object.components[index]
+
     // check flavor
     if ( !flavors.includes(component.flavor) ) {
-      msg = "Reference error\n" +
-            "Component:" + component.name + "\n" +
-            "Reason: invalid flavor '" + component.flavor +"'";
+      setFocus(".components[" + index + "].flavor")
 
-      return msg;
+      return "Reference error:\ninvalid flavor";
     }
 
     // check image
     if ( !images.includes(component.image) ) {
-      msg = "Reference error\n" +
-            "Component:" + component.name + "\n" +
-            "Reason: invalid image '" + component.image +"'";
+      setFocus(".components[" + index + "].image")
 
-      return msg;
+      return "Reference error:\ninvalid image";
     }
 
-    // check networks
+    // check interfaces
     var component_networks = []
-    for ( var network of component.networks ) {
-      component_networks.push( network.name )
-      if ( !networks.includes(network.name) ) {
-        msg = "Reference error\n" +
-              "Component:" + component.name + "\n" +
-              "Reason: invalid network '" + network.name +"'";
+    for ( var subindex = 0; subindex < component.interfaces.length; subindex++) {
+      var interface = component.interfaces[subindex]
 
-        return msg;
+      component_networks.push( interface.network )
+
+      if ( !networks.includes(interface.network) ) {
+        setFocus(".components[" + index + "].interfaces[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
       }
     }
 
     // check service networks
-    for ( var service of component.services ) {
-      if ( !component_networks.includes(service.network) ) {
-        msg = "Reference error\n" +
-              "Component:" + component.name + "/Service: " + service.name + "\n" +
-              "Reason: invalid service network '" + service.network +"'";
+    for ( var subindex = 0; subindex < component.services.length; subindex++) {
+      service = component.services[subindex]
 
-        return msg;
+      if ( !component_networks.includes(service.network) ) {
+        setFocus(".components[" + index + "].services[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
       }
     }
 
     // check dependencies
-    for ( var dependency of component.dependencies ) {
+    for ( var subindex = 0; subindex < component.dependencies.length; subindex++) {
+      dependency = component.dependencies[subindex]
+
+      if ( !components.includes(dependency.component) ) {
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].component")
+
+        return "Reference error\ninvalid component";
+      }
+
+      if ( !component_networks.includes(dependency.network) ) {
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
+      }
+
       var reference = dependency.component + ":" + dependency.service
       if ( !services.includes(reference) ) {
-        msg = "Reference error\n" +
-              "Component:" + component.name + "\n" +
-              "Reason: invalid reference '" + dependency.component + "/" + dependency.service + "'";
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].service")
 
-        return msg;
+        return "Reference error\ninvalid service";
       }
     }
   }
