@@ -1,0 +1,3182 @@
+<!DOCTYPE html>
+<html><!--
+ single html processed by https://github.com/zTrix/webpage2html
+ title: VNF Designer V0.9.1
+ url: ../../github/VNFDesigner/index.min.html
+ date: Sun Apr 15 23:22:12 2018
+-->
+<head>
+<meta charset="utf-8"/>
+<title>VNF Designer V0.9.1</title>
+<style data-href="scripts/components/app.css" rel="stylesheet" type="text/css">body {
+  min-height: 800px;
+  min-width:  1024px;
+  width: auto !important;
+  overflow:   hidden;
+}
+
+
+body {
+  background-color: white;
+  color:            black;
+  font-size:        14px;
+  font-family:      sans-serif;
+  font:             12px Arial;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently */
+}
+
+div, input, select, textarea {
+  box-sizing: border-box;
+}
+
+input, select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input, select {
+  border: none;
+  border-bottom: 1px solid darkgrey;
+}
+
+input:required, select:required {
+  border-bottom: 1px solid red;
+}
+
+input[readonly] {
+  border-bottom: none;
+}
+
+select {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA3XAAAN1wFCKJt4AAABWWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyI+CiAgICAgICAgIDx0aWZmOk9yaWVudGF0aW9uPjE8L3RpZmY6T3JpZW50YXRpb24+CiAgICAgIDwvcmRmOkRlc2NyaXB0aW9uPgogICA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgpMwidZAAAAe0lEQVQYGWWNQQqAIBBFm6K1eBbpAOomWhQUXiaKgg7mtlNJ81PEaEDm+b7jVFUsSr1s0Sml2mTrIn0ZWS2lHLTWM4fBOdfggNktQogeQ2SMOViMuKCYJ3YbI+XdLE4iuvEghNB57y8wKu/myd1au0b9zfJPRfhzpcj8ABbkF5o44buYAAAAAElFTkSuQmCC) no-repeat 188px 4px;
+}
+
+select.valid {
+  background-color: white;
+}
+
+textare:focus, select:focus, input:focus {
+  border-color: green;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#copyright {
+  position:  absolute;
+  right:     0px;
+  bottom:    0px;
+  padding:   8px;
+  font-size: 8px;
+  z-index:   1000;
+}
+
+#copyright a {
+  text-decoration: none;
+  color:           #eee;
+  padding-right:   32px;
+}
+
+#copyright a:hover {
+  color:           #888;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#app {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+}
+
+#appheader {
+  position:         absolute;
+  left:             0px;
+  right:            0px;
+  top:              0px;
+  height:           56px;
+  line-height:      32px;
+  vertical-align:   middle;
+  background-color: lightgrey;
+  border-bottom:    1px solid grey;
+  min-width:        1024px;
+}
+
+#appnavigation {
+  position:    absolute;
+  left:        0px;
+  width:       320px;
+  bottom:      0px;
+  top:         56px;
+  overflow-y: scroll;
+
+  border-right: 1px solid grey;
+  min-height:   544px;
+
+  background-color: #eee;
+}
+
+#appheader .tabs {
+  position:      absolute;
+  left:          0px;
+  width:         320px;
+  top:           32px;
+  height:        24px;
+  border-bottom: 1px solid grey;
+}
+
+#appheader .tabs div {
+  float:                    left;
+  line-height:              20px;
+  padding-left:             4px;
+  padding-right:            4px;
+  border-top-left-radius:   8px;
+  border-top-right-radius:  8px;
+  cursor:                   pointer;
+  background-color:         lightgrey;
+  margin-top:               2px;
+  border-left:              1px solid grey;
+  border-right:             1px solid grey;
+  border-top:               1px solid grey;
+  margin-left:              1px;
+}
+
+#appheader .tabs div.active {
+  background-color:         grey;
+  border-left:              1px solid grey;
+  border-right:             1px solid grey;
+  border-top:               1px solid grey;
+  color:                    white;
+}
+
+#appheader .tabs div.button {
+  float:            right;
+  margin:           4px;
+  height:           16px;
+  font-size:        8px;
+  line-height:      16px;
+  background-color: darkgrey;
+  padding-right:    4px;
+  border:           none;
+  border-radius:    8px;
+  vertical-align:   middle;
+  text-align:       center;
+}
+
+#appheader .tabs div.button:hover {
+  background-color: darkgrey;
+  color:            white;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appnavigation > div {
+  position:         absolute;
+  left:             0px;
+  right:            0px;
+  top:              0px;
+  bottom:           0px;
+  background-color: #eee;
+}
+
+#appnavigation .list .item {
+  display:       block;
+  padding-left:  8px;
+  height:        32px;
+  line-height:   32px;
+  border-bottom: 1px solid grey;
+}
+
+#appnavigation .list .item:hover {
+  background-color: lightblue;
+}
+
+#appnavigation .list .item .name {
+  display:       inline-block;
+  height:        32px;
+  line-height:   32px;
+  width:         280px;
+  text-overflow: ellipsis;
+  overflow:      hidden;
+  white-space:   nowrap;
+}
+
+#appnavigation .list .item .button {
+  float:            right;
+  margin-top:       8px;
+  margin-right:     4px;
+  height:           16px;
+  width:            16px;
+  font-size:        8px;
+  line-height:      16px;
+  background-color: darkgrey;
+  border:           none;
+  border-radius:    8px;
+  vertical-align:   middle;
+  text-align:       center;
+}
+
+#appnavigation .list .item .button:hover {
+  background-color: darkgrey;
+  color:            white;
+}
+/*----------------------------------------------------------------------------*/
+
+#appdetail {
+  position:    absolute;
+  left:        320px;
+  right:       0px;
+  bottom:      0px;
+  top:         56px;
+  overflow-y: scroll;
+  min-height:  544px;
+  min-width:   704px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appheader .logo {
+  position:       absolute;
+  top:            4px;
+  left:           4px;
+  height:         28px;
+  line-height:    28px;
+  padding-left:   4px;
+  padding-right:  4px;
+  vertical-align: middle;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  font-size:      20px;
+  color:          #aaa;
+}
+
+#appheader .label {
+  position:       absolute;
+  top:            32px;
+  left:           320px;
+  height:         20px;
+  line-height:    20px;
+  padding-left:   4px;
+  padding-right:  4px;
+  vertical-align: middle;
+  overflow:       hidden;
+  text-overflow:  ellipsis;
+  font-size:      16px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#appheader .buttons {
+  position:       absolute;
+  right:          0px;
+  top:            4px;
+  height:         20px;
+  padding-right:  32px;
+}
+
+#appheader .buttons div {
+  float:          left;
+  line-height:    20px;
+  padding-left:   4px;
+  padding-right:  4px;
+  margin-left:    2px;
+  margin-right:   2px;
+  border-radius:  4px;
+  cursor:         pointer;
+  color:          darkgrey;
+}
+
+#appheader .buttons div:hover {
+  color: black;
+}
+
+#appheader .buttons div:last-child {
+  padding-right:   4px;
+  width:           128px;
+}
+
+#appheader .buttons div.active {
+  background-color: blue;
+  color:            white;
+}
+</style>
+<style data-href="scripts/components/modal.css" rel="stylesheet" type="text/css">#modal {
+    position:         fixed;
+    left:             0;
+    top:              0;
+    width:            100%;
+    height:           100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition:       visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
+}
+
+#modal .content {
+    position:         absolute;
+    top:              25%;
+    left:             50%;
+    transform:        translate(-50%, -50%);
+    background-color: white;
+    padding:          1rem 1.5rem;
+    width:            24rem;
+    border-radius:    0.5rem;
+}
+
+#modal .close {
+    float:            right;
+    width:            1.5rem;
+    line-height:      1.5rem;
+    text-align:       center;
+    cursor:           pointer;
+    border-radius:    0.25rem;
+    background-color: lightgray;
+}
+
+#modal .close:hover {
+    background-color: darkgray;
+}
+</style>
+<style data-href="scripts/components/tenant.css" rel="stylesheet" type="text/css">#tenant_layout {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenant_layout .vnf {
+  position:      absolute;
+  left:          8px;
+  top:           8px;
+  height:        18px;
+  width:         200px;
+  line-height:   18px;
+  text-overflow: ellipsis;
+  overflow-y:    hidden;
+  font-size:     16px;
+  font-weight:   bolder;
+  white-space:   nowrap;
+}
+
+#tenant_layout .tenant {
+  position:      absolute;
+  left:          8px;
+  top:           26px;
+  height:        14px;
+  width:         200px;
+  line-height:   14px;
+  text-overflow: ellipsis;
+  overflow-y:    hidden;
+  font-size:     12px;
+  white-space:   nowrap;
+}
+
+#tenant_layout .version {
+  position:      absolute;
+  left:          8px;
+  top:           40px;
+  height:        12px;
+  width:         200px;
+  line-height:   14px;
+  text-overflow: ellipsis;
+  overflow-y:    hidden;
+  font-size:     10px;
+  white-space:   nowrap;
+}
+
+#tenant_layout .date {
+  position:      absolute;
+  left:          8px;
+  top:           52px;
+  height:        12px;
+  width:         200px;
+  line-height:   14px;
+  text-overflow: ellipsis;
+  overflow-y:    hidden;
+  font-size:     10px;
+  white-space:   nowrap;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenant_layout .network {
+  position:         absolute;
+  text-overflow:    ellipsis;
+  overflow:         hidden;
+  text-orientation: sideways;
+  writing-mode:     vertical-rl;
+  line-height:      12px;
+  border-right:     1px solid #808080;
+  white-space:      nowrap;
+}
+
+#tenant_layout .network.dummy {
+  opacity: 0;
+}
+
+#tenant_layout .network.dummy:hover {
+  opacity: 0.2;
+}
+
+#tenant_layout .network.network0  {border-right-color: #8080ff}
+#tenant_layout .network.network1  {border-right-color: #80ff80}
+#tenant_layout .network.network2  {border-right-color: #ff8080}
+#tenant_layout .network.network3  {border-right-color: #ffff80}
+#tenant_layout .network.network4  {border-right-color: #ff80ff}
+#tenant_layout .network.network5  {border-right-color: #80ffff}
+#tenant_layout .network.network6  {border-right-color: #c080ff}
+#tenant_layout .network.network7  {border-right-color: #ffc080}
+#tenant_layout .network.network8  {border-right-color: #80ffc0}
+#tenant_layout .network.network9  {border-right-color: #80c0ff}
+#tenant_layout .network.network10 {border-right-color: #ff80c0}
+#tenant_layout .network.network11 {border-right-color: #c0ff80}
+
+#tenant_layout .network input {
+  background-color: transparent;
+  border:           none;
+  height:           64px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenant_layout .interface {
+  position:         absolute;
+  background-color: #d0d0d0;
+}
+
+#tenant_layout .interface.network0  {background-color: #8080ff}
+#tenant_layout .interface.network1  {background-color: #80ff80}
+#tenant_layout .interface.network2  {background-color: #ff8080}
+#tenant_layout .interface.network3  {background-color: #ffff80}
+#tenant_layout .interface.network4  {background-color: #ff80ff}
+#tenant_layout .interface.network5  {background-color: #80ffff}
+#tenant_layout .interface.network6  {background-color: #c080ff}
+#tenant_layout .interface.network7  {background-color: #ffc080}
+#tenant_layout .interface.network8  {background-color: #80ffc0}
+#tenant_layout .interface.network9  {background-color: #80c0ff}
+#tenant_layout .interface.network10 {background-color: #ff80c0}
+#tenant_layout .interface.network11 {background-color: #c0ff80}
+
+#tenant_layout .interface .serverport {
+  position:         absolute;
+  left:             -2px;
+  top:              -2px;
+  width:            5px;
+  height:           5px;
+  border-radius:    2.5px;
+  background-color: inherit;
+}
+
+#tenant_layout .interface .switchport {
+  position:         absolute;
+  right:            -2px;
+  top:              -2px;
+  width:            5px;
+  height:           5px;
+  border-radius:    2.5px;
+  background-color: inherit;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenant_layout .component {
+  position:                  absolute;
+  background-color:          #d0d0d0;
+  border-top-left-radius:    16px;
+  border-bottom-left-radius: 16px;
+}
+
+#tenant_layout .component .zone {
+  position:                  absolute;
+  left:                      0px;
+  top:                       0px;
+  width:                     32px;
+  height:                    32px;
+  line-height:               32px;
+  border-top-left-radius:    16px;
+  border-bottom-left-radius: 16px;
+  vertical-align:            middle;
+  text-align:                center;
+}
+
+#tenant_layout .component .zone select {
+  position:         absolute;
+  left:             0px;
+  right:            0px;
+  width:            32px;
+  height:           32px;
+  line-height:      32px;
+  background-color: transparent;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+}
+
+#tenant_layout .component .zone:hover {
+  background-color: orange;
+  color:            blue;
+}
+
+#tenant_layout .component.dummy {
+  opacity: 0;
+}
+
+#tenant_layout .component.dummy:hover {
+  opacity: 0.2;
+}
+
+#tenant_layout .component .zone-O { background-color: #AAA }
+#tenant_layout .component .zone-E { background-color: #0C0 }
+#tenant_layout .component .zone-I { background-color: #88F }
+#tenant_layout .component .zone-M { background-color: #F44 }
+
+#tenant_layout .component .name {
+  position:         absolute;
+  left:             32px;
+  right:            0px;
+  top:              0px;
+  height:           18px;
+  text-overflow:    ellipsis;
+  overflow:         hidden;
+  white-space:      nowrap;
+  line-height:      18px;
+  padding-left:     4px;
+  padding-right:    4px;
+}
+
+#tenant_layout .component .name input {
+  background-color: inherit;
+  border: none;
+  font-size:        14px;
+  width:            160px;
+  text-overflow:    ellipsis;
+}
+
+#tenant_layout .component.dummy .name {
+  font-size:        14px;
+}
+
+#tenant_layout .component .sizing {
+  position:         absolute;
+  left:             32px;
+  right:            0px;
+  top:              18px;
+  height:           14px;
+  text-overflow:    ellipsis;
+  overflow:         hidden;
+  white-space:      nowrap;
+  line-height:      14px;
+  padding-left:     4px;
+  padding-right:    4px;
+  font-size:        12px;
+}
+
+/*----------------------------------------------------------------------------*/
+
+#tenantform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#tenantform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#tenantform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#tenantform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#tenantform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#tenantform .line label.top {
+  width:       200px;
+}
+
+#tenantform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#tenantform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+</style>
+<style data-href="scripts/components/flavor.css" rel="stylesheet" type="text/css">#flavorform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#flavorform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#flavorform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#flavorform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#flavorform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#flavorform .line label.top {
+  width:       200px;
+}
+
+
+#flavorform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#flavorform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+</style>
+<style data-href="scripts/components/image.css" rel="stylesheet" type="text/css">#imageform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#imageform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#imageform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#imageform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#imageform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#imageform .line label.top {
+  width:       200px;
+}
+
+
+#imageform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#imageform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+</style>
+<style data-href="scripts/components/network.css" rel="stylesheet" type="text/css">#networkform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#networkform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#networkform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#networkform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#networkform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#networkform .line label.top {
+  width:       200px;
+}
+
+
+#networkform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#networkform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+</style>
+<style data-href="scripts/components/component.css" rel="stylesheet" type="text/css">#componentform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#componentform .header {
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#componentform .subheader {
+  font-size:   14px;
+  font-weight: bolder;
+  padding-top: 24px;
+  padding-left: 8px;
+}
+
+#componentform .line {
+  padding-top: 8px;
+  padding-left: 24px;
+}
+
+#componentform .line label {
+  display:     inline-block;
+  width:       64px;
+  font-weight: bold;
+}
+
+#componentform .line label.top {
+  width:       200px;
+}
+
+
+#componentform .line input {
+  display:     inline-block;
+  width:       200px;
+}
+
+#componentform .line select {
+  display:     inline-block;
+  width:       200px;
+}
+</style>
+<style data-href="scripts/components/import.css" rel="stylesheet" type="text/css">#importform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#importform .header {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  height:   32px;
+  padding:  8px;
+
+  line-height: 32px;
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#importform .header .button {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#importform .line {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      32px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow:  scroll;
+}
+
+#importform .line textarea {
+  width:     100%;
+  height:    100%;
+  font-size: 8px;
+  border:    1px solid lightgrey;
+}
+</style>
+<style data-href="scripts/components/export.css" rel="stylesheet" type="text/css">#exportform {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow-y: scroll;
+}
+
+#exportform .header {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      0px;
+  height:   32px;
+  padding:  8px;
+
+  line-height: 32px;
+  font-size:   20px;
+  font-weight: bold;
+}
+
+#exportform .header .format {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#exportform .header .format select {
+  display: inline-block;
+  width:   200px;
+}
+
+#exportform .header .button {
+  float:            right;
+  font-size:        12px;
+  line-height:      32px;
+  border:           none;
+  vertical-align:   middle;
+  text-align:       center;
+  padding-right:    32px;
+}
+
+#exportform .line {
+  position: absolute;
+  left:     0px;
+  right:    0px;
+  top:      32px;
+  bottom:   0px;
+  padding:  8px;
+
+  overflow:  scroll;
+}
+
+#exportform .line textarea {
+  width:     100%;
+  height:    100%;
+  font-size: 8px;
+  border:    1px solid lightgrey;
+}
+</style>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/3.11.0/js-yaml.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+<script type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.10/js/solid.js"></script>
+<script type="text/javascript" src="https://use.fontawesome.com/releases/v5.0.10/js/fontawesome.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ajv/6.4.0/ajv.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+
+<script data-src="scripts/templates.js" type="text/javascript"><!--//--><![CDATA[//><!--
+var templates = {}
+
+templates['Canonical'] = `---
+vnf:        {{vnf}}
+tenant:     {{tenant}}
+datacenter: {{datacenter}}
+version:    {{version}}
+flavors:
+{{#flavors}}
+  - { uuid: "{{uuid}}", name: "{{name}}", vcpu: {{vcpu}}, ram: {{ram}}, disk: {{disk}}, special: "{{special}}" }
+{{/flavors}}
+images:
+{{#images}}
+  - { uuid: "{{uuid}}", name: "{{name}}", disk: "{{disk}}", container: "{{container}}", url: "{{url}}", special: "{{special}}" }
+{{/images}}
+networks:
+{{#networks}}
+  - { uuid: "{{uuid}}", name: "{{name}}", ipv4: "{{ipv4}}", ipv6: "{{ipv6}}", route: "{{route}}", special: "{{special}}" }
+{{/networks}}
+components:
+{{#components}}
+  - uuid:         "{{uuid}}"
+    name:         "{{name}}"
+    placement:    "{{placement}}"
+    flavor:       "{{flavor}}"
+    image:        "{{image}}"
+    min:          {{min}}
+    size:         {{size}}
+    max:          {{max}}
+    volumes:      {{^volumes}}[]{{/volumes}}
+{{#volumes}}
+      - { name: "{{name}}", size: {{size}}, type: "{{type}}", attributes: "{{attributes}}" }
+{{/volumes}}
+    interfaces:   {{^interfaces}}[]{{/interfaces}}
+{{#interfaces}}
+      - { network: "{{network}}", ipv4: "{{ipv4}}", ipv6: "{{ipv6}}", attributes: "{{attributes}}" }
+{{/interfaces}}
+    services:     {{^services}}[]{{/services}}
+{{#services}}
+      - { name: "{{name}}", network: "{{network}}", protocol: "{{protocol}}", range: "{{range}}" }
+{{/services}}
+    dependencies: {{^dependencies}}[]{{/dependencies}}
+{{#dependencies}}
+      - { component: "{{component}}", service: "{{service}}", network: "{{network}}" }
+{{/dependencies}}
+{{/components}}
+`
+
+templates['Summary'] = `---
+vnf:        {{vnf}}
+tenant:     {{tenant}}
+datacenter: {{datacenter}}
+version:    {{version}}
+`
+
+templates['DTAG Tosca'] = `---
+tosca_definitions_version: TOSCA_dtag_profile_for_nfv_0_0_6
+
+description: VNF Template for the {{tenant}} tenant.
+
+metadata:
+  template_name:                  TOSCA DTAG NFV Sample Template
+  feature_EnableResourceGroup:    True
+  feature_EnableAutoScalingGroup: False
+  feature_SingleInstance:         True
+  feature_AllDummySecurityGroups: True
+  feature_EnableContrailRBAC:     True
+  feature_EnableHeatStackOutput:  False
+
+################################################################################
+
+topology_template:
+
+  node_templates:
+
+    ############################################################################
+    # Phase 1: Tenant
+    ############################################################################
+    {{vnf}}:
+      type: tosca.dtag.nodes.VNF
+      properties:
+        name:        {{vnf}}
+        version:     '{{version}}'
+        vendor:      {{vendor}}
+        description: 'Tenant for the VNF: {{vnf}} in data center: {{datacenter}}'
+
+    {{tenant}}:
+      type: tosca.dtag.nodes.Tenant
+      properties:
+        name:        {{vnf}}_{{tenant}}
+        version:     '{{version}}'
+        description: {{vnf}} tenant in {{datacenter}} data center
+        vnf:         {{vnf}}
+        datacenter:  {{datacenter}}
+        ipv6_prefix: 'fdfd:1:1:b208::' # dummy
+        keys: |
+
+        flavors:
+{{#flavors}}
+        - name:      {{name}}
+          vcpu:      {{vcpu}}
+          memory:    {{ram}}
+          disk:      {{disk}}
+          ephemeral: 0
+          swap:      0
+          isPublic:  true
+{{/flavors}}
+
+
+    ############################################################################
+    # Phase 2: Networks
+    ############################################################################
+
+{{#networks}}
+    {{name}}:
+      type: tosca.dtag.nodes.Network
+      properties:
+        name:        {{name}}
+        version:     '1.0'
+        description: 'Tenant-network: {{name}}'
+        tenant:      {{tenant}}
+        target:      '{{route}}'
+        ipv4:
+          cidr:      '{{ipv4}}'
+          gateway:   ''
+          start:     ''
+          end:       ''
+        ipv6:
+          cidr:      '{{ipv6}}'
+          gateway:   ''
+          start:     ''
+          end:       ''
+
+{{/networks}}
+
+    ############################################################################
+    # External Components
+    ############################################################################
+
+{{#components}}
+    {{name}}:
+      type: tosca.dtag.nodes.ExternalComponent
+      properties:
+        name:        {{name}}
+        version:     {{version}}
+        description: 'External component: {{name}} of tenant {{tenant}}'
+        network:     {{networks[0].name}}
+        ipv4:
+          - '{{interfaces[0].ipv4}}'
+        capabilities:
+{{#services}}
+          service{{@index}}:
+            properties:
+              name:      {{name}}
+              interface: {{network}}
+              ports:
+                - protocol: {{protocol}}
+                  range:    '{{range}}'
+{{/services}}
+        requirements:
+{{#dependencies}}
+        - {{component}}_{{service}}:
+            node_filter:
+              properties:
+              - component:  {{component}}
+                capability: {{service}}
+                network:    {{network}}
+{{/dependencies}}
+
+{{/components}}
+
+    ############################################################################
+    # Phase 3
+    ############################################################################
+
+{{#components}}
+    {{name}}:
+      type: tosca.dtag.nodes.InternalComponent
+      properties:
+        name:         {{name}}
+        version:      {{version}}
+        description:  'Internal omponent: {{name}} of tenant {{tenant}}'
+        tenant:       {{tenant}}
+        placement:    {{placement}}
+        flavor:       {{flavor}}
+        image:        {{image}}
+        minimum_size: {{min}}
+        maximum_size: {{max}}
+        default_size: {{size}}
+        interfaces:
+{{#interfaces}}
+        - name: {{network}}
+{{/interfaces}}
+        volumes:
+{{#volumes}}
+        - name:   {{name}}
+          size:   {{size}}
+          type:   {{type}}
+          device: {{device}}
+{{/volumes}}
+        capabilities:
+{{#services}}
+          service{{@index}}:
+            properties:
+              name:      {{name}}
+              interface: {{network}}
+              ports:
+                - protocol: {{protocol}}
+                  range:    '{{range}}'
+{{/services}}
+        requirements:
+{{#dependencies}}
+        - {{component}}_{{service}}:
+            node_filter:
+              properties:
+              - component:  {{component}}
+                capability: {{service}}
+                network:    {{network}}
+{{/dependencies}}
+
+{{/components}}`
+
+//--><!]]></script>
+<script data-src="scripts/model.js" type="text/javascript"><!--//--><![CDATA[//><!--
+var data = `
+vnf:        Example
+tenant:     Tenant
+datacenter: datacenter
+version:    1.0.0
+flavors:
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b0", name: "none",      vcpu: 0, ram:     0, disk:   0, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b1", name: "m1.tiny",   vcpu: 1, ram:   512, disk:   0, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b2", name: "m1.small",  vcpu: 1, ram:  2048, disk:  20, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b3", name: "m1.medium", vcpu: 2, ram:  4096, disk:  40, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b4", name: "m1.large",  vcpu: 4, ram:  8192, disk:  80, special: "" }
+  - { uuid: "29539307-5dd5-49ab-a562-f2e6073798b5", name: "m1.xlarge", vcpu: 8, ram: 16384, disk: 160, special: "" }
+images:
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e0", name: "none",         disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e1", name: "CentOS-6",     disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e2", name: "CentOS-7",     disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e3", name: "Ubuntu-14.04", disk: "qcow2", container: "bare", special: "", url: "" }
+  - { uuid: "5b16f37c-eeae-4f3a-8a4e-f442cbc381e4", name: "Ubuntu-17.04", disk: "qcow2", container: "bare", special: "", url: "" }
+networks:
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a0",  name: "oam", ipv4: "", ipv6: "", route: "", special: "" }
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a1",  name: "svc", ipv4: "", ipv6: "", route: "", special: "" }
+  - { uuid: "138e7669-4af5-4c6a-b8ae-7b17465810a2",  name: "m2m", ipv4: "", ipv6: "", route: "", special: "" }
+components:
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f0",
+      name: "client", placement: "other", flavor: "none", image: "none", min: 1, size: 1, max: 1,
+      volumes: [],
+      interfaces: [{network: "svc", ipv4: "0.0.0.0/0", ipv6: "", attributes: ""}],
+      services: [],
+      dependencies: [{component: "web", service: "http", network: "svc"}]}
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f1",
+      name: "web", placement: "ext", flavor: "m1.small", image: "CentOS-6", min: 2, size: 3, max: 5,
+      volumes: [],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}, {network: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
+      services: [{name: "http", network: "svc", protocol: "tcp", range: "80,443"}, {name: "ssh", network: "oam", protocol: "tcp", range: "22"}],
+      dependencies: [{component: "database", service: "mysql", network: "m2m"}]}
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f2",
+      name: "database", placement: "int", flavor: "m1.small", image: "CentOS-6", min: 3, size: 3, max: 3,
+      volumes: [{name: "data1", size: 100, type: "INT", attributes: ""}, {name: "data2", size: 2200, type: "INT", attributes: ""}],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "m2m", ipv4: "192.168.2.1/24", ipv6: "", attributes: ""}],
+      services: [{name: "mysql", network: "m2m", protocol: "tcp", range: "3306"}, {name: "ssh", network: "oam", protocol: "tcp", range: "22"}],
+      dependencies: []}
+  - { uuid: "0daa3709-513e-46c8-8bc5-2536e533a9f3",
+      name: "jumphost", placement: "mgmt", flavor: "m1.small", image: "CentOS-6", min: 2, size: 2, max: 2,
+      volumes: [],
+      interfaces: [{network: "oam", ipv4: "192.168.0.1/24", ipv6: "", attributes: ""}, {network: "svc", ipv4: "192.168.1.1/24", ipv6: "", attributes: ""}],
+      services: [{name: "ssh", network: "svc", protocol: "tcp", range: "22"}],
+      dependencies: [{component: "web", service: "ssh", network: "oam"}, {component: "database", service: "ssh", network: "oam"}]}
+`
+
+//------------------------------------------------------------------------------
+
+var current = jsyaml.safeLoad(data);
+var target  = jsyaml.safeLoad(data);
+var model   = current;
+
+//------------------------------------------------------------------------------
+
+function setModel(object) {
+  model.vnf        = object.vnf
+  model.tenant     = object.tenant
+  model.version    = object.version
+  model.datacenter = object.datacenter
+  model.flavors    = object.flavors
+  model.images     = object.images
+  model.networks   = object.networks
+  model.components = object.components
+}
+
+//------------------------------------------------------------------------------
+
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+//------------------------------------------------------------------------------
+
+function addFlavor() {
+  var uuid = uuidv4();
+  var nr   = model.flavors.length + 1;
+
+  model.flavors.push( { uuid: uuid, name: "flavor-" + nr } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteFlavor(flavor) {
+  var index = model.flavors.indexOf(flavor);
+
+  if (index > -1) { model.flavors.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function addImage() {
+  var uuid = uuidv4();
+  var nr   = model.images.length + 1;
+
+  model.images.push( { uuid: uuid, name: "image-" + nr, disk: "qcow2", container: "bare", special: "", url: "" } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteImage(image) {
+  var index = model.images.indexOf(image);
+
+  if (index > -1) { model.images.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function addNetwork() {
+  var uuid = uuidv4();
+  var nr   = model.networks.length + 1;
+
+  model.networks.push( { uuid: uuid, name: "net-" + nr, ipv4: "", ipv6: "", route: "", special: "" } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteNetwork(network) {
+  var index = model.networks.indexOf(network);
+
+  if (index > -1) { model.networks.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function hasComponent(name) {
+  for (var comp of model.components) {
+    if (comp.name === name) { return comp }
+  }
+  return null;
+}
+
+//------------------------------------------------------------------------------
+
+function addComponent() {
+  var uuid = uuidv4();
+  var nr   = model.components.length + 1;
+
+  model.components.push({
+    uuid: uuid, name: "comp-" + nr,
+    placement: "mgmt", flavor: "none", image: "none", min: 1, max: 1, size: 1,
+    volumes: [], interfaces: [], services: [], dependencies: [] } );
+}
+
+//------------------------------------------------------------------------------
+
+function deleteComponent(component) {
+  var index = model.components.indexOf(component);
+
+  if (index > -1) { model.components.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function addComponentVolume(component) {
+  var nr = component.volumes.length + 1;
+
+  component.volumes.push({
+    name: "volume-" + nr, size: 100,
+    type: component.placement.toUpperCase(), attributes:  ""});
+}
+
+//------------------------------------------------------------------------------
+
+function delComponentVolume(component,volume) {
+  var index = component.volumes.indexOf(volume);
+
+  if (index > -1) { component.volumes.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function addComponentInterface(component,network="") {
+  var name = (network !== "" ? network : "net-" + (component.interfaces.length + 1));
+
+  component.interfaces.push({network: network, ipv4: "", ipv6: "", attributes:  ""});
+}
+
+//------------------------------------------------------------------------------
+
+function delComponentInterface(component,interface) {
+  var index = component.interfaces.indexOf(interface);
+
+  if (index > -1) { component.interfaces.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function hasComponentInterface(component,network) {
+  for (var interface of component.interfaces) {
+    if (interface.network === network) {return interface;}
+  }
+  return null;
+}
+
+//------------------------------------------------------------------------------
+
+function addComponentService(component) {
+  var nr = component.services.length + 1;
+
+  component.services.push({
+    name: "svc-" + nr, network: "", protocol: "tcp", range:  "0-65535"});
+}
+
+//------------------------------------------------------------------------------
+
+function delComponentService(component,service) {
+  var index = component.services.indexOf(service);
+
+  if (index > -1) { component.services.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+function addComponentDependency(component) {
+  var nr = component.dependencies.length + 1;
+
+  component.dependencies.push({
+    component: "dep-" + nr, service: "",network: ""});
+}
+
+//------------------------------------------------------------------------------
+
+function delComponentDependency(component,dependency) {
+  var index = component.dependencies.indexOf(dependency);
+
+  if (index > -1) { component.dependencies.splice(index,1) }
+}
+
+//------------------------------------------------------------------------------
+
+//--><!]]></script>
+<script data-src="scripts/view.js" type="text/javascript"><!--//--><![CDATA[//><!--
+var view = {
+	navigation: "Tenant",
+  detail:     "Tenant",
+  entity:     null,
+	field:      null,
+  export:     "Canonical",
+  modal:      "",
+	now:        "",
+	mode:       "current"
+}
+
+//------------------------------------------------------------------------------
+
+function tick() {
+	var t = new Date();
+
+	view.now = t.getFullYear()                   + "-" +
+	           ("0" + t.getMonth()).substr(-2)   + "-" +
+						 ("0" + t.getDate()).substr(-2)    + " " +
+						 ("0" + t.getHours()).substr(-2)   + ":" +
+						 ("0" + t.getMinutes()).substr(-2) + ":" +
+						 ("0" + t.getSeconds()).substr(-2);
+}
+
+setInterval(tick, 1000)
+
+//------------------------------------------------------------------------------
+
+function setContext(context) {
+	// import
+	if ( context === 'Import' ) {
+		view.navigation = 'Tenant'
+		view.detail     = 'Import'
+		return
+	}
+	// export
+	if ( context === 'Export' ) {
+		view.navigation = 'Tenant'
+		view.detail     = 'Export'
+		return
+	}
+	// delta
+	if ( context === 'Delta' ) {
+		view.navigation = 'Delta'
+		view.detail     = 'Delta'
+		return
+	}
+	// tenant
+	if ( context === 'Tenant' ) {
+		view.navigation = 'Tenant'
+		view.detail     = 'Tenant'
+		return
+	}
+
+	// otherwise
+	view.navigation = context
+	if ( view.detail !== view.navigation ) {
+		view.detail = 'Tenant'
+	}
+}
+
+//------------------------------------------------------------------------------
+
+function setFocus(path) {
+	var mapping = { flavors: "Flavor", images: 'Image', networks: 'Network', components: 'Component'}
+  var parts   = path.split(".")
+	var length  = parts.length
+
+	console.log(path)
+
+	// VNF/tenant related data
+	if ( parts.length === 2 ) {
+		view.navigation = 'Tenant'
+		view.detail     = 'Tenant'
+		view.field      = parts[1]
+		return
+	}
+
+	// images/flavors and networks
+	if ( parts.length === 3 ) {
+		var pos      = parts[1].indexOf('[')
+		var entities = parts[1].substr(0,pos)
+		var index    = Number(parts[1].substr(pos+1).replace(']',''))
+		var field    = parts[2]
+
+		view.navigation = mapping[entities]
+		view.detail     = mapping[entities]
+		view.entity     = model[entities][index]
+		view.field      = field
+		return
+	}
+
+	// components
+	if ( parts.length === 4 ) {
+		var pos         = parts[1].indexOf('[')
+		var entities    = parts[1].substr(0,pos)
+		var index       = Number(parts[1].substr(pos+1).replace(']',''))
+
+		var subpos      = parts[2].indexOf('[')
+		var subentities = parts[2].substr(0,subpos)
+		var subindex    = Number(parts[2].substr(subpos+1).replace(']',''))
+		var field       = subentities + "_" + String(subindex) + "_" + parts[3]
+
+		view.navigation = mapping[entities]
+		view.detail     = mapping[entities]
+		view.entity     = model[entities][index]
+		view.field      = field
+		return
+	}
+
+  console.log( parts)
+}
+
+//--><!]]></script>
+<script data-src="scripts/validator.js" type="text/javascript"><!--//--><![CDATA[//><!--
+var schema = {
+  // "$schema":     "http://tsai.eu/vnfd-00-01-00/schema#",
+  "title":       "VNF Desciptor",
+  "description": "A simple VNF descriptor",
+  "type":        "object",
+  "required":    ["vnf", "tenant", "version", "datacenter", "flavors", "images", "networks", "components"],
+  "properties": {
+
+    "vnf": { "type": "string", "minLength": 1,
+      "description": "The unique identifier for a virtual network function" },
+
+    "tenant": { "type": "string", "minLength": 1,
+      "description": "The name of the virtual data center" },
+
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\.\\d+$",
+      "description": "Semantic version of the VNF descriptor" },
+
+    "datacenter": { "type": "string", "minLength": 1,
+      "description": "The name of the virtual data center" },
+
+    "flavors": {
+      "description": "The sizing of virtual servers",
+      "type":        "array",
+      "items": {
+        "title":    "Flavor",
+        "type":     "object",
+        "required": ["uuid","name","vcpu","ram","disk","special"],
+        "properties": {
+
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the flavor" },
+
+          "name": { "type": "string",
+            "description": "Name of the flavor" },
+
+          "vcpu": { "type": "number",
+            "description": "Number of virtual core processing units as string" },
+
+          "ram": { "type": "number",
+            "description": "Size of memory in megabytes as string" },
+
+          "disk": { "type": "number",
+            "description": "Size of local disk in gigabytes as string" },
+
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
+      }
+    },
+
+    "images": {
+      "description": "The operating systems for virtual servers",
+      "type":        "array",
+      "items": {
+        "title":    "Image",
+        "type":     "object",
+        "required": ["uuid","name","disk","container"],
+        "properties": {
+
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the image" },
+
+          "name": { "type": "string",
+            "description": "Name of the image" },
+
+          "disk": { "type": "string", "enum": ['aki','ami','ari','iso','qcow2','raw','vdi','vhd','vhdx','vmdk'],
+            "description": "Disk format of the image" },
+
+          "container": { "type": "string", "enum": ['aki','ami','ari','bare','docker','ova','ovf'],
+            "description": "Container format of the image" },
+
+          "url": { "type": "string",
+            "description": "URL for the image" },
+
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
+      }
+    },
+
+    "networks": {
+      "description": "The virtual networks",
+      "type":        "array",
+      "items": {
+        "title":    "Network",
+        "type":     "object",
+        "required": ["uuid","ipv4","ipv6","special"],
+        "properties": {
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the virtual network" },
+
+          "name": { "type": "string",
+            "description": "Name of the virtual network" },
+
+          "ipv4": { "type": "string",
+            "description": "IPv4 attributes of the virtual network" },
+
+          "ipv6": { "type": "string",
+            "description": "IPv6 attributes of the virtual network" },
+
+          "special": { "type": "string",
+            "description": "Additional special attributes" }
+        }
+      }
+    },
+
+    "components": {
+      "description": "The virtual servers",
+      "type":        "array",
+      "items": {
+        "title":    "Component",
+        "type":     "object",
+        "required": ["uuid","name","placement","flavor","image","min","size","max","interfaces","volumes","services","dependencies"],
+        "properties": {
+
+          "uuid": { "type": "string",
+            "description": "Unique identifier of the virtual server" },
+
+          "name": { "type": "string",
+            "description": "Name of the virtual server" },
+
+          "placement": { "type": "string", "enum": ["other", "ext", "int", "mgmt"],
+            "description": "Placement of the virtual server" },
+
+          "flavor": { "type": "string",
+            "description": "Name of the virtual server sizing" },
+
+          "image": { "type": "string",
+            "description": "Name of the operating system" },
+
+          "min": { "type": "number",
+            "description": "Minimum size of the cluster" },
+
+          "size": { "type": "number",
+            "description": "Default size of the cluster" },
+
+          "max": { "type": "number",
+            "description": "Maximum size of the cluster" },
+
+          "interfaces": {
+            "description": "The interfaces to virtual networks",
+            "type":        "array",
+            "items": {
+              "title":    "Component Interface",
+              "type":     "object",
+              "required": ["network","ipv4","ipv6","attributes"],
+              "properties": {
+
+                "network": { "type": "string",
+                  "description": "Name of the virtual network" },
+
+                "ipv4": { "type": "string",
+                  "description": "IPv4 attributes of the interface" },
+
+                "ipv6": { "type": "string",
+                  "description": "IPv6 attributes of the interface" },
+
+                "attributes": { "type": "string",
+                  "description": "Additional special attributes" }
+              }
+            }
+          },
+
+          "volumes": {
+            "description": "The attached virtual block storage",
+            "type":        "array",
+            "items": {
+              "title": "Component Volume",
+              "type":  "object",
+              "required": ["name","size","type","attributes"],
+              "properties": {
+
+                "name": { "type": "string",
+                  "description": "Name of the virtual network" },
+
+                "size": { "type": "number",
+                  "description": "Size of the block storage in gigabyte" },
+
+                "type": { "type": "string", "enum": ["EXT", "INT"],
+                  "description": "Name of block storage pool" },
+
+                "attributes": { "type": "string",
+                  "description": "Additional special attributes" }
+              }
+            }
+          },
+
+          "services": {
+            "description": "The exposed services",
+            "type":        "array",
+            "items": {
+              "title":    "Component Service",
+              "type":     "object",
+              "required": ["name","network","protocol","range"],
+              "properties": {
+
+                "name": { "type": "string",
+                  "description": "Name of the service" },
+
+                "network": { "type": "string",
+                  "description": "The virtual network via which the service is exposed" },
+
+                "protocol": { "type": "string", "enum": ["tcp", "udp", "icmp"],
+                  "description": "The service protocol" },
+
+                "range": { "type": "string", "minimum": 1,
+                  "description": "Port range" }
+              }
+            }
+          },
+
+          "dependencies": {
+            "description": "The dependencies to services provided by other componenntse",
+            "type":        "array",
+            "items": {
+              "title":      "Component Network",
+              "type":       "object",
+              "required":   ["component","service","network"],
+              "properties": {
+
+                "component": { "type": "string",
+                  "description": "Name of the other component"},
+
+                "service": { "type": "string",
+                  "description": "The name of the service provided by the other component"},
+
+                "network": { "type": "string",
+                  "description": "The virtual network via which the service is consumed" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//------------------------------------------------------------------------------
+
+function validate_schema(object) {
+  var ajv    = new Ajv(); // options can be passed, e.g. {allErrors: true}
+  var verify = ajv.compile(schema);
+  var valid  = verify(object);
+
+  if (!valid) {
+    setFocus(verify.errors[0].dataPath)
+
+    return "Schema error:\nfield " + verify.errors[0].message;
+  }
+
+  return '';
+}
+
+//------------------------------------------------------------------------------
+
+function validate_xref(object) {
+
+  // construct lookups
+  var flavors    = object.flavors.map( x => x.name )
+  var images     = object.images.map( x => x.name )
+  var networks   = object.networks.map( x => x.name )
+  var components = object.components.map( x => x.name )
+  var services   = []
+
+  for ( var component of object.components ) {
+    for ( var service of component.services ) {
+      services.push(component.name + ":" + service.name)
+    }
+  }
+
+  // check flavors, images, networks and dependencies
+  for ( var index =  0; index < object.components.length; index++ ) {
+    component = object.components[index]
+
+    // check flavor
+    if ( !flavors.includes(component.flavor) ) {
+      setFocus(".components[" + index + "].flavor")
+
+      return "Reference error:\ninvalid flavor";
+    }
+
+    // check image
+    if ( !images.includes(component.image) ) {
+      setFocus(".components[" + index + "].image")
+
+      return "Reference error:\ninvalid image";
+    }
+
+    // check interfaces
+    var component_networks = []
+    for ( var subindex = 0; subindex < component.interfaces.length; subindex++) {
+      var interface = component.interfaces[subindex]
+
+      component_networks.push( interface.network )
+
+      if ( !networks.includes(interface.network) ) {
+        setFocus(".components[" + index + "].interfaces[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
+      }
+    }
+
+    // check service networks
+    for ( var subindex = 0; subindex < component.services.length; subindex++) {
+      service = component.services[subindex]
+
+      if ( !component_networks.includes(service.network) ) {
+        setFocus(".components[" + index + "].services[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
+      }
+    }
+
+    // check dependencies
+    for ( var subindex = 0; subindex < component.dependencies.length; subindex++) {
+      dependency = component.dependencies[subindex]
+
+      if ( !components.includes(dependency.component) ) {
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].component")
+
+        return "Reference error\ninvalid component";
+      }
+
+      if ( !component_networks.includes(dependency.network) ) {
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].network")
+
+        return "Reference error\ninvalid network";
+      }
+
+      var reference = dependency.component + ":" + dependency.service
+      if ( !services.includes(reference) ) {
+        setFocus(".components[" + index + "].dependencies[" + subindex + "].service")
+
+        return "Reference error\ninvalid service";
+      }
+    }
+  }
+
+  return '';
+}
+
+//------------------------------------------------------------------------------
+
+//--><!]]></script>
+<script data-src="scripts/components/tenant.js" type="text/javascript"><!--//--><![CDATA[//><!--
+const DX         = 8;
+const DY         = 8;
+const NET_WIDTH  = 32;
+const NET_HEIGHT = 64;
+const CMP_WIDTH  = 200;
+const CMP_HEIGHT = 32;
+const XOFFSET    = DX+CMP_WIDTH;
+const YOFFSET    = DY+NET_HEIGHT;
+const XSLOT      = DX+NET_WIDTH;
+const YSLOT      = DY+CMP_HEIGHT;
+const PXOFFSET   = 320;
+const PYOFFSET   = 56;
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant_network',
+  {
+    props:   ['model','view','network','index'],
+    methods: {
+      handleChange: function(e) {
+        if (e.target.value==="") {deleteNetwork(this.network)}
+      }
+    },
+    computed: {
+      t: function(index) {
+        return DY;
+      },
+      l: function(index) {
+        return DX+CMP_WIDTH + this.index * (DX+NET_WIDTH);
+      },
+      w: function(index) {
+        return NET_WIDTH;
+      },
+      h: function(index) {
+        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT);
+      }
+    },
+    template: `
+      <div
+        v-bind:class="'network network' + index"
+        v-bind:style="{
+          top:         t + 'px',
+          left:        l + 'px',
+          width:       w + 'px',
+          height:      h + 'px'
+        }">
+        <input v-model="network.name" v-on:change="handleChange">
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant_network2',
+  {
+    props:   ['model','view'],
+    methods: {
+      handleClick: function() {addNetwork()}
+    },
+    computed: {
+      t: function(index) {
+        return DY;
+      },
+      l: function(index) {
+        return DX+CMP_WIDTH + this.model.networks.length * (DX+NET_WIDTH);
+      },
+      w: function(index) {
+        return NET_WIDTH;
+      },
+      h: function(index) {
+        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT);
+      }
+    },
+    template: `
+      <div
+        class="network dummy"
+        v-on:click="handleClick"
+        v-bind:style="{
+          top:         t + 'px',
+          left:        l + 'px',
+          width:       w + 'px',
+          height:      h + 'px'
+        }">new network
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant_interface',
+  {
+    props:   ['model','view','component','interface','index','subindex'],
+    computed: {
+      t: function() {
+        return (this.subindex+1) * CMP_HEIGHT/(this.component.interfaces.length + 1)
+      },
+      l: function() {
+        return CMP_WIDTH;
+      },
+      w: function() {
+        for ( var i = 0; i < this.model.networks.length; i++ )
+        {
+          if (this.interface.network === this.model.networks[i].name) {
+            return i * (DX+NET_WIDTH) + NET_WIDTH
+          }
+        }
+
+        return 0
+      },
+      h: function() {
+        return 1
+      },
+      n: function() {
+        for ( var i = 0; i < this.model.networks.length; i++ )
+        {
+          if (this.interface.network === this.model.networks[i].name) {
+            return i
+          }
+        }
+
+        return 0
+      }
+    },
+    template: `
+      <div
+        v-bind:class="'interface network' + n + ' component' + index"
+        v-bind:style="{
+          top:    t + 'px',
+          left:   l + 'px',
+          width:  w + 'px',
+          height: h + 'px',
+        }">
+        <div class="serverport"></div>
+        <div class="switchport"></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant_component',
+  {
+    props:   ['model','view','component','index'],
+    methods: {
+      handleChange: function(e) {
+        if (e.target.value==="") {
+          deleteComponent(this.component)
+        }
+      }
+    },
+    computed: {
+      t: function() {
+        return DY+NET_HEIGHT + this.index * (DY+CMP_HEIGHT);
+      },
+      l: function() {
+        return DX
+      },
+      w: function() {
+        return CMP_WIDTH
+      },
+      h: function() {
+        return CMP_HEIGHT
+      },
+      z: function() {
+        return this.component.placement.substr(0,1).toUpperCase();
+      },
+      zones: function() {
+        return [{name: "other", tag: 'O'}, {name: "ext", tag: 'E'}, {name: "int", tag: 'I'}, {name: "mgmt", tag: 'M'}]
+      }
+    },
+    template: `
+      <div
+        v-bind:class="'component index' + index"
+        v-bind:style="{
+          top:    t + 'px',
+          left:   l + 'px',
+          width:  w + 'px',
+          height: h + 'px'
+        }">
+        <div v-bind:class="'zone zone-' + z">
+          <select v-model="component.placement">
+            <option disabled value="">Please select one</option>
+            <option v-for="zone in zones" v-bind:value="zone.name">
+              {{ zone.tag }}
+            </option>
+          </select>
+        </div>
+        <div class="name"><input v-model="component.name" v-on:change="handleChange"></div>
+        <div class="sizing">({{component.min}}/{{component.size}}/{{component.max}})</div>
+        <tenant_interface
+          v-for="(interface, subindex) in component.interfaces"
+          :key="subindex"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:component="component"
+          v-bind:interface="interface"
+          v-bind:index="index"
+          v-bind:subindex="subindex"></tenant_interface>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant_component2',
+  {
+    props:   ['model','view'],
+    methods: {
+      handleClick: function() {addComponent()}
+    },
+    computed: {
+      t: function() {
+        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT);
+      },
+      l: function() {
+        return DX
+      },
+      w: function() {
+        return CMP_WIDTH
+      },
+      h: function() {
+        return CMP_HEIGHT
+      }
+    },
+    template: `
+      <div
+        class="component dummy"
+        v-on:click="handleClick"
+        v-bind:style="{
+          top:    t + 'px',
+          left:   l + 'px',
+          width:  w + 'px',
+          height: h + 'px'
+        }">
+        <div class="'zone zone-O'"></div>
+        <div class="name">new component</div>
+        <div class="sizing"></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenant',
+  {
+    props:    ['model','view'],
+    methods: {
+      handleClick: function(e) {
+        var x = e.pageX - PXOFFSET - XOFFSET;
+        var y = e.pageY - PYOFFSET - YOFFSET;
+
+        var net_index = Math.floor(x/XSLOT);
+        var cmp_index = Math.floor(y/YSLOT);
+
+        // check if click was in the cross-section of a network and a component
+        if ( 0 <= net_index && net_index < this.model.networks.length &&
+             0 <= cmp_index && cmp_index < this.model.components.length ) {
+
+          // determine network and component
+          var net = this.model.networks[net_index];
+          var cmp = this.model.components[cmp_index];
+
+          // delete interface if component has an interface to that network
+          var iface = hasComponentInterface(cmp,net.name)
+          if (iface) {
+            delComponentInterface(cmp,iface)
+          } else {
+            addComponentInterface(cmp,net.name)
+          }
+        }
+      }
+    },
+    template: `
+    <div id="tenant_layout" v-on:click="handleClick">
+      <div class="vnf">VNF: {{model.vnf}}</div>
+      <div class="tenant">Tenant: {{model.tenant}}</div>
+      <div class="version">Version: {{model.version}}</div>
+      <div class="date">Timestamp: {{view.now}}</div>
+      <tenant_network
+        v-for="(network, index) in model.networks"
+        :key="'network-' + index"
+        v-bind:model="model"
+        v-bind:view="view"
+        v-bind:network="network"
+        v-bind:index="index"></tenant_network>
+      <tenant_network2
+        :key="'network-dummy'"
+        v-bind:model="model"
+        v-bind:view="view"></tenant_network2>
+      <tenant_component
+        v-for="(component, index) in model.components"
+        :key="'component-' + index"
+        v-bind:model="model"
+        v-bind:view="view"
+        v-bind:component="component"
+        v-bind:index="index"></tenant_component>
+      <tenant_component2
+        :key="'component-dummy'"
+        v-bind:model="model"
+        v-bind:view="view"></tenant_component2>
+    </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'tenantform',
+  {
+    props:    ['model','view'],
+    template: `
+    <div id="tenantform">
+      <div class="header">Tenant: {{model.name}}</div>
+
+      <div class="line">
+        <label for="name">VNF:</label>
+        <input v-model="model.vnf" id="vnf" name="vnf" required>
+      </div>
+      <div class="line">
+        <label for="tenant">Tenant:</label>
+        <input v-model="model.tenant" id="tenant" name="tenant" required>
+      </div>
+      <div class="line">
+        <label for="ram">Version:</label>
+        <input v-model="model.version" id="version" name="version" required>
+      </div>
+      <div class="line">
+        <label for="disk">Datacenter:</label>
+        <input v-model="model.datacenter" id="datacenter" name="datacenter" required>
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/flavor.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'flavoritem',
+  {
+    props:    ['model','view','flavor'],
+    methods:  {
+      pick: function(entity) {
+        this.view.detail='Flavor';
+        this.view.entity=entity;
+      },
+      del: function(entity) {
+        deleteFlavor(entity)
+        if ( this.view.detail === 'Flavor' ) {
+          this.view.detail='';
+          this.view.entity=null;
+        }
+      }
+    },
+    template: `
+      <div class="item">
+        <div class="name"   v-on:click="pick(flavor)"><i class="fas fa-microchip"/>&nbsp;{{flavor.name}}</div>
+        <div class="button" v-on:click="del(flavor)"><i class="fas fa-minus"/></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'flavors',
+  {
+    props:    ['model','view'],
+    template: `
+      <div class="list">
+        <flavoritem
+          :key="flavor.uuid"
+          v-for="flavor in model.flavors"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:flavor="flavor"></flavoritem>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'flavorform',
+  {
+    props:    ['model','view','flavor'],
+    template: `
+    <div id="flavorform">
+      <div class="header">Flavor: {{flavor.name}}</div>
+
+      <div class="line">
+        <label for="name">Name:</label>
+        <input v-model="flavor.name" id="name" name="name" required>
+      </div>
+      <div class="line">
+        <label for="vcpu">vCPU:</label>
+        <input v-model.number="flavor.vcpu" id="vcpu" name="vcpu" type="number" required>
+      </div>
+      <div class="line">
+        <label for="ram">RAM:</label>
+        <input v-model.number="flavor.ram" id="ram" name="ram" type="number" required>
+      </div>
+      <div class="line">
+        <label for="disk">Disk:</label>
+        <input v-model.number="flavor.disk" id="ipv4" name="disk" type="number" required>
+      </div>
+      <div class="line">
+        <label for="special">Attributes:</label>
+        <input v-model="flavor.special" id="special" name="special">
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/image.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'imageitem',
+  {
+    props:    ['model','view','image'],
+    methods:  {
+      pick: function(entity) {
+        this.view.detail='Image';
+        this.view.entity=entity;
+      },
+      del: function(entity) {
+        deleteImage(entity)
+        if ( this.view.detail === 'Image' ) {
+          this.view.detail='';
+          this.view.entity=null;
+        }
+      }
+    },
+    template: `
+      <div class="item">
+        <div class="name"   v-on:click="pick(image)"><i class="fas fa-hockey-puck"/>&nbsp;{{image.name}}</div>
+        <div class="button" v-on:click="del(image)"><i class="fas fa-minus"/></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'images',
+  {
+    props:    ['model','view'],
+    template: `
+      <div class="list">
+        <imageitem
+          :key="image.uuid"
+          v-for="image in model.images"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:image="image"></imageitem>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'imageform',
+  {
+    props:    ['model','view','image'],
+    computed: {
+      container_formats: function() {
+        return ['aki','ami','ari','bare','docker','ova','ovf']
+      },
+      disk_formats: function() {
+        return ['aki','ami','ari','iso','qcow2','raw','vdi','vhd','vhdx','vmdk']
+      }
+    },
+    template: `
+    <div id="imageform">
+      <div class="header">Image: {{image.name}}</div>
+
+      <div class="line">
+        <label for="name">Name:</label>
+        <input v-model="image.name" id="name" name="name" required>
+      </div>
+      <div class="line">
+        <label for="format">Disk:</label>
+        <select id="disk" name="disk" v-model="image.disk" v-bind:class="{valid: disk_formats.includes(image.disk)}" required>
+          <option disabled value="">Please select one</option>
+          <option v-for="format in disk_formats" v-bind:value="format">
+            {{ format }}
+          </option>
+        </select>
+      </div>
+      <div class="line">
+        <label for="name">Container:</label>
+        <select id="container" name="container" v-model="image.container" v-bind:class="{valid: container_formats.includes(image.container)}" required>
+          <option disabled value="">Please select one</option>
+          <option v-for="format in container_formats" v-bind:value="format">
+            {{ format }}
+          </option>
+        </select>
+      </div>
+      <div class="line">
+        <label for="name">URL:</label>
+        <input v-model="image.url" id="url" name="url" required>
+      </div>
+      <div class="line">
+        <label for="name">Attributes:</label>
+        <input v-model="image.special" id="special" name="special" required>
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/network.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'networkitem',
+  {
+    props:    ['model','view','network'],
+    methods:  {
+      pick: function(entity) {
+        this.view.detail='Network';
+        this.view.entity=entity;
+      },
+      del: function(entity) {
+        deleteNetwork(entity)
+        if ( this.view.detail === 'Network' ) {
+          this.view.detail='';
+          this.view.entity=null;
+        }
+      }
+    },
+    template: `
+      <div class="item">
+        <div class="name"   v-on:click="pick(network)"><i class="fas fa-cloud"/>&nbsp;{{network.name}}</div>
+        <div class="button" v-on:click="del(network)"><i class="fas fa-minus"/></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'networks',
+  {
+    props:    ['model','view'],
+    template: `
+      <div class="list">
+        <networkitem
+          :key="network.uuid"
+          v-for="network in model.networks"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:network="network"></networkitem>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+// network form
+Vue.component(
+  'networkform',
+  {
+    props:    ['model','view','network'],
+    template: `
+    <div id="networkform">
+      <div class="header">Network: {{network.name}}</div>
+
+      <div class="line">
+        <label for="name">Name:</label>
+        <input v-model="network.name" id="name" name="name" required>
+      </div>
+      <div class="line">
+        <label for="ipv4">IPv4:</label>
+        <input v-model="network.ipv4" id="ipv4" name="ipv4">
+      </div>
+      <div class="line">
+        <label for="ipv6">IPv6:</label>
+        <input v-model="network.ipv6" id="ipv6" name="ipv6">
+      </div>
+      <div class="line">
+        <label for="route">Route:</label>
+        <input v-model="network.route" id="ipv4" name="route">
+      </div>
+      <div class="line">
+        <label for="special">Attributes:</label>
+        <input v-model="network.special" id="special" name="special">
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/component.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'componentitem',
+  {
+    props:    ['model','view','component'],
+    methods:  {
+      pick: function(entity) {
+        this.view.detail='Component';
+        this.view.entity=entity;
+      },
+      del: function(entity) {
+        deleteComponent(entity)
+        if ( this.view.detail === 'Component' ) {
+          this.view.detail='';
+          this.view.entity=null;
+        }
+      }
+    },
+    template: `
+      <div class="item">
+        <div class="name"   v-on:click="pick(component)"><i class="fas fa-server"/>&nbsp;{{component.name}}</div>
+        <div class="button" v-on:click="del(component)"><i class="fas fa-minus"/></div>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'components',
+  {
+    props:    ['model','view'],
+    template: `
+      <div class="list">
+        <componentitem
+          :key="component.uuid"
+          v-for="component in model.components"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:component="component"></componentitem>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component(
+  'componentform',
+  {
+    props:    ['model','view','component'],
+    computed: {
+      services: function() {
+        results = [];
+
+        for (var component of model.components) {
+          for (var service of component.services) {
+            results.push({component: component.name, service: service.name})
+          }
+        }
+
+        return results;
+      },
+      services2: function() {
+        results = [];
+
+        for (var component of model.components) {
+          for (var service of component.services) {
+            results.push( component.name + ":" + service.name)
+          }
+        }
+
+        return results;
+      },
+      components: function() {
+        return model.components.map(x => x.name)
+      },
+      all_networks: function() {
+        return model.networks.map(x => x.name)
+      },
+      interfaces: function() {
+        return this.component.interfaces.map(x => x.network)
+      },
+      zones: function() {
+        return ['other','ext','int','mgmt']
+      },
+      flavors: function() {
+        return model.flavors.map(x => x.name)
+      },
+      images: function() {
+        return model.images.map(x => x.name)
+      },
+      storagetypes: function() {
+        return ['EXT','INT']
+      },
+      protocols: function() {
+        return ['tcp','udp','icmp']
+      }
+    },
+    methods: {
+      addVolume:     function()           { addComponentVolume(this.component); },
+      delVolume:     function(volume)     { delComponentVolume(this.component,volume); },
+      addInterface:  function()           { addComponentInterface(this.component); },
+      delInterface:  function(interface)  { delComponentInterface(this.component,interface); },
+      addService:    function()           { addComponentService(this.component); },
+      delService:    function(service)    { delComponentService(this.component,service); },
+      addDependency: function()           { addComponentDependency(this.component); },
+      delDependency: function(dependency) { delComponentDependency(this.component,dependency); }
+    },
+    template: `
+      <div id="componentform">
+        <div class="header">Component: {{component.name}}</div>
+
+        <div class="line">
+          <label for="name">Name:</label>
+          <input class="col5" v-model="component.name" id="name" name="name" required>
+        </div>
+        <div class="line">
+          <label for="placement">Placement:</label>
+          <select id="placement" name="placement" v-model="component.placement" v-bind:class="{valid: zones.includes(component.placement)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="zone in zones" v-bind:value="zone">
+              {{ zone }}
+            </option>
+          </select>
+          <label for="flavor">Flavor:</label>
+          <select id="flavor" name="flavor" v-model="component.flavor" v-bind:class="{valid: flavors.includes(component.flavor)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="flavor in flavors" v-bind:value="flavor">
+              {{ flavor }}
+            </option>
+          </select>
+          <label for="image">Image:</label>
+          <select id="image" name="image" v-model="component.image" v-bind:class="{valid: images.includes(component.image)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="image in images" v-bind:value="image">
+              {{ image }}
+            </option>
+          </select>
+        </div>
+        <div class="line">
+          <label for="min">Minimum:</label>
+          <input id="min" name="min" v-model.number="component.min" type="number" required>
+          <label for="size">Size:</label>
+          <input id="size" name="size" v-model.number="component.size" type="number" required>
+          <label for="max">Maximum:</label>
+          <input id="max" name="max" v-model.number="component.max" type="number" required>
+        </div>
+
+        <div class="subheader">Volumes:</div>
+
+        <div class="line">
+          <label class="top">Name:</label>
+          <label class="top">Size:</label>
+          <label class="top">Type:</label>
+          <label class="top">Attributes:</label>
+          <label v-on:click="addVolume"><i class="fas fa-plus-circle"/></label>
+        </div>
+        <div class="line" v-for="(volume,index) in component.volumes">
+          <input v-bind:id="'volumes_' + index + '_name'" v-bind:name="'volumes_' + index + '_name'" v-model="volume.name" required>
+          <input v-bind:id="'volumes_' + index + '_size'" v-bind:name="'volumes_' + index + '_size'" v-model.number="volume.size" type="number" required>
+          <select v-bind:id="'volumes_' + index + '_type'" v-bind:name="'volumes_' + index + '_type'" v-model="volume.type" v-bind:class="{valid: storagetypes.includes(volume.type)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="storagetype in storagetypes" v-bind:value="storagetype">
+              {{ storagetype }}
+            </option>
+          </select>
+          <input v-bind:id="'volumes_' + index + '_attributes'" v-bind:name="'volumes_' + index + '_attributes'" v-model="volume.attributes">
+          <label v-on:click="delVolume(volume)"><i class="fas fa-minus-circle"/></label>
+        </div>
+
+        <div class="subheader">Interfaces:</div>
+
+        <div class="line">
+          <label class="top">Network:</label>
+          <label class="top">IPv4:</label>
+          <label class="top">IPv6:</label>
+          <label class="top">Attributes:</label>
+          <label v-on:click="addInterface()"><i class="fas fa-plus-circle"/></label>
+        </div>
+        <div class="line" v-for="(interface,index) in component.interfaces">
+          <select v-bind:id="'interfaces_' + index + '_network'" v-bind:name="'interfaces_' + index + '_network'" v-model="interface.network" v-bind:class="{valid: all_networks.includes(interface.network)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="network in all_networks" v-bind:value="network">
+              {{ network }}
+            </option>
+          </select>
+          <input v-bind:id="'interfaces_' + index + '_ipv4'"       v-bind:name="'interfaces_' + index + '_ipv4'"       v-model="interface.ipv4">
+          <input v-bind:id="'interfaces_' + index + '_ipv6'"       v-bind:name="'interfaces_' + index + '_ipv6'"       v-model="interface.ipv6">
+          <input v-bind:id="'interfaces_' + index + '_attributes'" v-bind:name="'interfaces_' + index + '_attributes'" v-model="interface.attributes">
+          <label v-on:click="delInterface(interface)"><i class="fas fa-minus-circle"/></label>
+        </div>
+
+        <div class="subheader">Services:</div>
+
+        <div class="line">
+          <label class="top">Name:</label>
+          <label class="top">Network</label>
+          <label class="top">Protocol</label>
+          <label class="top">Range:</label>
+          <label v-on:click="addService()"><i class="fas fa-plus-circle"/></label>
+        </div>
+        <div class="line" v-for="(service,index) in component.services">
+          <input v-bind:id="'services_' + index + '_name'" v-bind:name="'services_' + index + '_name'" v-model="service.name" required>
+          <select v-bind:id="'services_' + index + '_network'" v-bind:name="'services_' + index + '_network'" v-model="service.network" v-bind:class="{valid: service.network !== ''}">
+            <option disabled value="">Please select one</option>
+            <option v-for="interface in component.interfaces" v-bind:value="interface.network">
+              {{ interface.network }}
+            </option>
+          </select>
+          <select v-bind:id="'services_' + index + '_protocol'" v-bind:name="'services_' + index + '_protocol'" v-model="service.protocol" v-bind:class="{valid: protocols.includes(service.protocol)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="protocol in protocols" v-bind:value="protocol">
+              {{ protocol }}
+            </option>
+          </select>
+          <input v-bind:id="'services_' + index + '_range'" v-bind:name="'services_' + index + '_range'" v-model="service.range" required>
+          <label v-on:click="delService(service)"><i class="fas fa-minus-circle"/></label>
+        </div>
+
+        <div class="subheader">Dependencies:</div>
+
+        <div class="line">
+          <label class="top">Component:</label>
+          <label class="top">Service:</label>
+          <label class="top">Network</label>
+          <label v-on:click="addDependency()"><i class="fas fa-plus-circle"/></label>
+        </div>
+        <div class="line" v-for="(dependency,index) in component.dependencies">
+          <select v-bind:id="'dependencies_' + index + '_component'" v-bind:name="'dependencies_' + index + '_component'" v-model="dependency.component" v-bind:class="{valid: components.includes(dependency.component)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="component in components" v-bind:value="component">
+              {{ component }}
+            </option>
+          </select>
+          <select v-bind:id="'dependencies_' + index + '_service'" v-bind:name="'dependencies_' + index + '_service'" v-model="dependency.service" v-bind:class="{valid: services2.includes(dependency.component + ':' + dependency.service)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="service in services" v-if="service.component === dependency.component" v-bind:value="service.service">
+              {{ service.service }}
+            </option>
+          </select>
+          <select v-bind:id="'dependencies_' + index + '_network'" v-bind:name="'dependencies_' + index + '_network'" v-model="dependency.network" v-bind:class="{valid: interfaces.includes(dependency.network)}" required>
+            <option disabled value="">Please select one</option>
+            <option v-for="interface in component.interfaces" v-bind:value="interface.network">
+              {{ interface.network }}
+            </option>
+          </select>
+
+          <label v-on:click="delDependency(dependency)"><i class="fas fa-minus-circle"/></label>
+        </div>
+
+        <div class="line">&nbsp;</div>
+
+      </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/import.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'importform',
+  {
+    props:    ['model','view','templates'],
+    methods: {
+      import_model: function() {
+        var data   = document.getElementById("import").value;
+        var object = null;
+        var msg    = '';
+
+        // convert data to object
+        try {
+          object = jsyaml.safeLoad(data);
+        }
+        catch (err)  {
+          view.modal = err.message
+          return
+        }
+
+        // verify schema
+        msg = validate_schema(object);
+        if (msg != '') {
+          view.modal = msg
+          return
+        }
+
+        // verify xrefs
+        msg = validate_xref(object);
+        if (msg != '') {
+          view.modal = msg
+          return
+        }
+
+        // copy data to model
+        model.vnf        = object.vnf
+        model.tenant     = object.tenant
+        model.version    = object.version
+        model.datacenter = object.version
+        model.flavors    = object.flavors
+        model.images     = object.images
+        model.networks   = object.networks
+        model.components = object.components
+
+        // set focus to tenant
+        setContext("Tenant")
+      }
+    },
+    template: `
+    <div id="importform">
+      <div class="header">
+        Import:
+        <div class="button" v-on:click="import_model"><i class="fas fa-redo-alt"/>&nbsp;Import</div>
+      </div>
+
+      <div class="line">
+        <textarea id="import" name="import"></textarea>
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/export.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component(
+  'exportform',
+  {
+    props:    ['model','view','templates'],
+    methods: {
+      copyToClipboard: function() {
+        document.getElementById("export").focus();
+        document.getElementById("export").select();
+        document.execCommand("Copy");
+      },
+      download: function() {
+        var text     = document.getElementById("export").value;
+        var element  = document.createElement('a');
+        var filename = "vnf-descriptor.txt";
+
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+      }
+    },
+    computed: {
+      formats: function() {
+        return Object.keys(templates)
+      },
+      result: function() {
+        var format = view.export
+        var tmpl   = templates[format]
+        var result = Mustache.render(tmpl, model);
+        return result;
+      }
+    },
+    template: `
+    <div id="exportform">
+      <div class="header">
+        Export: {{model.vnf}}/{{model.tenant}} ({{model.version}})
+        <div class="button" v-on:click="download"><i class="fas fa-download"/>&nbsp;Download</div>
+        <div class="button" v-on:click="copyToClipboard"><i class="fas fa-copy"/>&nbsp;Copy</div>
+        <div class="format">
+          Format: &nbsp;
+          <select v-model="view.export">
+            <option v-for="format in formats" v-bind:value="format">
+              {{ format }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="line">
+        <textarea id="export" name="export" readonly>{{result}}</textarea>
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/modal.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component( 'modal',
+  {
+    props:   ['view'],
+    computed: {
+      html: function() {
+        var lines = view.modal.split("\n");
+        var title = "<h2>" + lines[0] + "</h2>"
+        var msgs  = ""
+
+        for ( var index = 1; index < lines.length; index ++) {
+          var line  = lines[index]
+          var pos   = line.indexOf(":")
+
+          if ( pos < 0 ) {
+            msgs = msgs + line + "<br/>"
+          } else {
+            var subtitle = line.substr(0, pos)
+            var text     = line.substr(pos+1)
+
+            msgs = msgs + "<b>" + subtitle + ":</b> " + text + "<br/>"
+          }
+          var parts = line.split(":",1)
+        }
+
+        return title + msgs
+      }
+    },
+    methods: {
+      close: function() {
+        view.modal = ""
+        if (view.field) {
+          var el = document.getElementById(view.field);
+
+          if (el) { el.focus() }
+        }
+      }
+    },
+    template: `
+    <div id="modal">
+      <div class="content">
+        <span v-on:click="close" class="close">&times;</span>
+        <span v-html="html"></span>
+      </div>
+    </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/components/app.js" type="text/javascript"><!--//--><![CDATA[//><!--
+Vue.component( 'appheader',
+  {
+    props:    ['model','view'],
+    methods: {
+      context: function(ctxt) {
+        setContext(ctxt)
+      },
+      toggleState: function() {
+        if (view.mode === 'current')
+        {
+          current = JSON.parse(JSON.stringify(model));
+          view.mode='target'
+          setModel(target)
+          setContext('Tenant')
+        } else if (view.mode === 'target') {
+          target = JSON.parse(JSON.stringify(model));
+          view.mode='current'
+          setModel(current)
+          setContext('Tenant')
+        }
+      },
+      add: function() {
+        if ( view.navigation === "Flavor" )    { addFlavor(); }
+        if ( view.navigation === "Image" )     { addImage(); }
+        if ( view.navigation === "Network" )   { addNetwork(); }
+        if ( view.navigation === "Component" ) { addComponent(); }
+      },
+      del: function() {
+        if ( view.navigation === "Flavor" )    { deleteFlavor(); }
+        if ( view.navigation === "Image" )     { deleteImage(); }
+        if ( view.navigation === "Network" )   { deleteNetwork(); }
+        if ( view.navigation === "Component" ) { deleteComponent(); }
+      },
+      validate: function() {
+        var object = JSON.parse(JSON.stringify(model));
+
+        // verify schema
+        msg = validate_schema(object);
+        if (msg != '') {
+          view.modal = msg
+          return
+        }
+
+        // verify xrefs
+        msg = validate_xref(object);
+        if (msg != '') {
+          view.modal = msg
+          return
+        }
+
+        // everything is fine
+        view.modal = "No Validation Errors"
+      },
+      pretty: function() {
+        var map   = {other: "A", ext: "B", int: "C", mgmt: "D"}
+        var comps = this.model.components.slice(0)
+        var sort  = function(a,b){
+          var x = map[a.placement] + a.name
+          var y = map[b.placement] + b.name
+          console.log( x +" " + y)
+
+          if (x === y) {return 0}
+
+          return (x<y ? -1: 1)
+        }
+
+        this.model.components = comps.sort( sort )
+
+        this.context('Tenant')
+      }
+    },
+    template: `
+      <div id="appheader" v-bind:class="view.mode">
+        <div class="logo"><i class="fas fa-cloud"/>&nbsp;VNF Designer</div>
+        <div v-if="view.detail !== 'Delta' && view.mode === 'current'" class="label">Current state: {{model.vnf}}/{{model.tenant}} ({{model.version}})</div>
+        <div v-if="view.detail !== 'Delta' && view.mode === 'target'"  class="label">Target state: {{model.vnf}}/{{model.tenant}} ({{model.version}})</div>
+        <div v-if="view.detail === 'Delta'" class="label">Current state: {{model.vnf}}/{{model.tenant}} ({{model.version}}) &rarr; Target state: {{model.vnf}}/{{model.tenant}} ({{model.version}})</div>
+        <div class="buttons">
+          <div v-on:click="pretty">
+            <i class="fas fa-certificate"/>&nbsp;Sort
+          </div>
+          <div v-on:click="validate">
+            <i class="fas fa-check-circle"/>&nbsp;Validate
+          </div>
+          <div v-on:click="context('Import')">
+            <i class="fas fa-arrow-alt-circle-down"/>&nbsp;Import
+          </div>
+          <div v-on:click="context('Export')">
+            <i class="fas fa-arrow-alt-circle-up"/>&nbsp;Export
+          </div>
+          <div v-on:click="context('Delta')">
+            <i class="fas fa-arrow-circle-right "/>&nbsp;Compare
+          </div>
+          <div class="state" v-on:click="toggleState">
+            &nbsp;<i class="fas fa-adjust"/>&nbsp; State: {{view.mode}}
+          </div>
+        </div>
+        <div class="tabs">
+          <template v-if="view.navigation === 'Tenant'">
+            <div class="active">Tenant</div>
+            <div v-on:click="context('Flavor')">Flavors</div>
+            <div v-on:click="context('Image')">Images</div>
+            <div v-on:click="context('Network')">Networks</div>
+            <div v-on:click="context('Component')">Components</div>
+          </template>
+          <template v-if="view.navigation === 'Image'">
+            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Flavor')">Flavors</div>
+            <div class="active">Images</div>
+            <div v-on:click="context('Network')">Networks</div>
+            <div v-on:click="context('Component')">Components</div>
+          </template>
+          <template v-if="view.navigation === 'Flavor'">
+            <div v-on:click="context('Tenant')">Tenant</div>
+            <div class="active">Flavors</div>
+            <div v-on:click="context('Image')">Images</div>
+            <div v-on:click="context('Network')">Networks</div>
+            <div v-on:click="context('Component')">Components</div>
+          </template>
+          <template v-if="view.navigation === 'Network'">
+            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Flavor')">Flavors</div>
+            <div v-on:click="context('Image')">Images</div>
+            <div class="active">Networks</div>
+            <div v-on:click="context('Component')">Components</div>
+          </template>
+          <template v-if="view.navigation === 'Component'">
+            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Flavor')">Flavors</div>
+            <div v-on:click="context('Image')">Images</div>
+            <div v-on:click="context('Network')">Networks</div>
+            <div class="active">Components</div>
+          </template>
+          <div class="button" v-if="view.navigation!='Tenant' && view.navigation!='Delta'" v-on:click="add"><i class="fas fa-plus"/></div>
+        </div>
+      </div>`
+  }
+);
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'appnavigation',
+  {
+    props:    ['model','view'],
+    template: `
+      <div id="appnavigation">
+        <tenantform
+          v-if="view.navigation === 'Tenant'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </tenantform>
+        <flavors
+          v-if="view.navigation === 'Flavor'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </flavors>
+        <images
+          v-if="view.navigation === 'Image'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </images>
+        <networks
+          v-if="view.navigation === 'Network'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </networks>
+        <components
+          v-if="view.navigation === 'Component'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </components>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'appdetail',
+  {
+    props:    ['model','current','target','view','templates'],
+    template: `
+      <div id="appdetail">
+        <flavorform
+          v-if="view.detail === 'Flavor'"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:flavor="view.entity">
+        </flavorform>
+        <imageform
+          v-if="view.detail === 'Image'"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:image="view.entity">
+        </imageform>
+        <networkform
+          v-if="view.detail === 'Network'"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:network="view.entity">
+        </networkform>
+        <componentform
+          v-if="view.detail === 'Component'"
+          v-bind:model="model"
+          v-bind:component="view.entity">
+        </componentform>
+        <exportform
+          v-if="view.detail === 'Export'"
+          v-bind:model="model"
+          v-bind:view="view"
+          v-bind:templates="templates">
+        </exportform>
+        <importform
+          v-if="view.detail === 'Import'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </importform>
+        <deltaform
+          v-if="view.detail === 'Delta'"
+          v-bind:model="model"
+          v-bind:current="current"
+          v-bind:target="target"
+          v-bind:view="view">
+        </deltaform>
+        <tenant
+          v-if="view.detail === 'Tenant'"
+          v-bind:model="model"
+          v-bind:view="view">
+        </tenant>
+      </div>`
+  }
+)
+
+//------------------------------------------------------------------------------
+
+Vue.component( 'app',
+  {
+    props:    ['model','current','target','view','templates'],
+    template: `
+      <div>
+        <appheader     v-bind:model="model" v-bind:view="view"></appheader>
+        <appnavigation v-bind:model="model" v-bind:view="view"></appnavigation>
+        <appdetail
+          v-bind:model="model"
+          v-bind:current="current"
+          v-bind:target="target"
+          v-bind:view="view"
+          v-bind:templates="templates">
+        </appdetail>
+        <modal v-if="view.modal !== ''" v-bind:view="view"></modal>
+      </div>`
+  }
+)
+
+//--><!]]></script>
+<script data-src="scripts/main.js" type="text/javascript"><!--//--><![CDATA[//><!--
+function main() {
+  var app = new Vue({
+    el:   '#app',
+    data: {model: model, view: view, templates: templates},
+    template: `
+      <app
+        v-bind:model="model"
+        v-bind:current="current"
+        v-bind:target="target"
+        v-bind:view="view"
+        v-bind:templates="templates">
+      </app>`
+  })
+}
+
+window.onload = main;
+
+//--><!]]></script>
+</head>
+<body>
+<div id="app"></div>
+<div id="copyright"><a data-href="mailto:bernard@tsai.eu" href="../../github/VNFDesigner/mailto:bernard@tsai.eu">© Bernard Tsai 2018</a></div>
+</body>
+</html>
