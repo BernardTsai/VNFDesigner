@@ -31,7 +31,10 @@ Vue.component(
       result: function() {
         var format = view.export
         var tmpl   = templates[format]
-        var result = Mustache.render(tmpl, model);
+
+        nunjucks.configure({trimBlocks: true})
+        var result = nunjucks.renderString(tmpl, model);
+
         return result;
       }
     },

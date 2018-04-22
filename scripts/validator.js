@@ -63,11 +63,23 @@ var schema = {
           "name": { "type": "string",
             "description": "Name of the image" },
 
-          "disk": { "type": "string", "enum": ['aki','ami','ari','iso','qcow2','raw','vdi','vhd','vhdx','vmdk'],
+          "version": { "type": "string",
+            "description": "Version of the image" },
+
+          "format": { "type": "string", "enum": ['aki','ami','ari','iso','qcow2','raw','vdi','vhd','vhdx','vmdk'],
             "description": "Disk format of the image" },
 
           "container": { "type": "string", "enum": ['aki','ami','ari','bare','docker','ova','ovf'],
             "description": "Container format of the image" },
+
+          "disk": { "type": "string",
+            "description": "Minimum disk requirements" },
+
+          "size": { "type": "string",
+            "description": "Size of the image" },
+
+          "checksum": { "type": "string",
+            "description": "Checksum of the image" },
 
           "url": { "type": "string",
             "description": "URL for the image" },
@@ -328,6 +340,8 @@ function validate_xref(object) {
       }
 
       var reference = dependency.component + ":" + dependency.service
+      console.log(reference)
+      console.log(services)
       if ( !services.includes(reference) ) {
         setFocus(".components[" + index + "].dependencies[" + subindex + "].service")
 

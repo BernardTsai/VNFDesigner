@@ -68,13 +68,7 @@
 
 #tenant_layout .network {
   position:         absolute;
-  text-overflow:    ellipsis;
-  overflow:         hidden;
-  text-orientation: sideways;
-  writing-mode:     vertical-rl;
-  line-height:      12px;
-  border-right:     1px solid #808080;
-  white-space:      nowrap;
+  border-left:      1px solid #808080;
 }
 
 #tenant_layout .network.dummy {
@@ -85,23 +79,31 @@
   opacity: 0.2;
 }
 
-#tenant_layout .network.network0  {border-right-color: #8080ff}
-#tenant_layout .network.network1  {border-right-color: #80ff80}
-#tenant_layout .network.network2  {border-right-color: #ff8080}
-#tenant_layout .network.network3  {border-right-color: #ffff80}
-#tenant_layout .network.network4  {border-right-color: #ff80ff}
-#tenant_layout .network.network5  {border-right-color: #80ffff}
-#tenant_layout .network.network6  {border-right-color: #c080ff}
-#tenant_layout .network.network7  {border-right-color: #ffc080}
-#tenant_layout .network.network8  {border-right-color: #80ffc0}
-#tenant_layout .network.network9  {border-right-color: #80c0ff}
-#tenant_layout .network.network10 {border-right-color: #ff80c0}
-#tenant_layout .network.network11 {border-right-color: #c0ff80}
+#tenant_layout .network.network0  {border-left-color: #8080ff}
+#tenant_layout .network.network1  {border-left-color: #80ff80}
+#tenant_layout .network.network2  {border-left-color: #ff8080}
+#tenant_layout .network.network3  {border-left-color: #C0C000}
+#tenant_layout .network.network4  {border-left-color: #ff80ff}
+#tenant_layout .network.network5  {border-left-color: #80ffff}
+#tenant_layout .network.network6  {border-left-color: #c080ff}
+#tenant_layout .network.network7  {border-left-color: #ffc080}
+#tenant_layout .network.network8  {border-left-color: #80ffc0}
+#tenant_layout .network.network9  {border-left-color: #80c0ff}
+#tenant_layout .network.network10 {border-left-color: #ff80c0}
+#tenant_layout .network.network11 {border-left-color: #c0ff80}
 
-#tenant_layout .network input {
+#tenant_layout .network input, #tenant_layout .network .label {
+  position:         absolute;
+  left:             -20px;
+  top:              -16px;
+  width:            40px;
   background-color: transparent;
   border:           none;
-  height:           64px;
+  line-height:      12px;
+  text-align:       center;
+  overflow:         hidden;
+  text-overflow:    ellipsis;
+  white-space:      nowrap;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -114,7 +116,7 @@
 #tenant_layout .interface.network0  {background-color: #8080ff}
 #tenant_layout .interface.network1  {background-color: #80ff80}
 #tenant_layout .interface.network2  {background-color: #ff8080}
-#tenant_layout .interface.network3  {background-color: #ffff80}
+#tenant_layout .interface.network3  {background-color: #C0C000}
 #tenant_layout .interface.network4  {background-color: #ff80ff}
 #tenant_layout .interface.network5  {background-color: #80ffff}
 #tenant_layout .interface.network6  {background-color: #c080ff}
@@ -177,6 +179,7 @@
   border:           none;
   vertical-align:   middle;
   text-align:       center;
+  text-align-last:  center;
 }
 
 #tenant_layout .component .zone:hover {
@@ -247,8 +250,6 @@
   top:      0px;
   bottom:   0px;
   padding:  8px;
-
-  overflow-y: scroll;
 }
 
 #tenantform .header {

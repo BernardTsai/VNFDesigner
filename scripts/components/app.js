@@ -97,35 +97,35 @@ Vue.component( 'appheader',
         </div>
         <div class="tabs">
           <template v-if="view.navigation === 'Tenant'">
-            <div class="active">Tenant</div>
+            <div class="active">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>
             <div v-on:click="context('Component')">Components</div>
           </template>
           <template v-if="view.navigation === 'Image'">
-            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div class="active">Images</div>
             <div v-on:click="context('Network')">Networks</div>
             <div v-on:click="context('Component')">Components</div>
           </template>
           <template v-if="view.navigation === 'Flavor'">
-            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Tenant')">General</div>
             <div class="active">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>
             <div v-on:click="context('Component')">Components</div>
           </template>
           <template v-if="view.navigation === 'Network'">
-            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div class="active">Networks</div>
             <div v-on:click="context('Component')">Components</div>
           </template>
           <template v-if="view.navigation === 'Component'">
-            <div v-on:click="context('Tenant')">Tenant</div>
+            <div v-on:click="context('Tenant')">General</div>
             <div v-on:click="context('Flavor')">Flavors</div>
             <div v-on:click="context('Image')">Images</div>
             <div v-on:click="context('Network')">Networks</div>

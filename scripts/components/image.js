@@ -64,8 +64,12 @@ Vue.component(
         <input v-model="image.name" id="name" name="name" required>
       </div>
       <div class="line">
-        <label for="format">Disk:</label>
-        <select id="disk" name="disk" v-model="image.disk" v-bind:class="{valid: disk_formats.includes(image.disk)}" required>
+        <label for="name">Version:</label>
+        <input v-model="image.version" id="version" name="version" required>
+      </div>
+      <div class="line">
+        <label for="format">Format:</label>
+        <select id="disk" name="format" v-model="image.format" v-bind:class="{valid: disk_formats.includes(image.format)}" required>
           <option disabled value="">Please select one</option>
           <option v-for="format in disk_formats" v-bind:value="format">
             {{ format }}
@@ -82,8 +86,20 @@ Vue.component(
         </select>
       </div>
       <div class="line">
+        <label for="name">Min. Disk:</label>
+        <input v-model="image.disk" id="disk" name="disk" required>
+      </div>
+      <div class="line">
+        <label for="name">Size:</label>
+        <input v-model="image.size" id="size" name="size" required>
+      </div>
+      <div class="line">
         <label for="name">URL:</label>
         <input v-model="image.url" id="url" name="url" required>
+      </div>
+      <div class="line">
+        <label for="name">Checksum:</label>
+        <input v-model="image.checksum" id="checksum" name="checksum" required>
       </div>
       <div class="line">
         <label for="name">Attributes:</label>

@@ -4,6 +4,7 @@ const NET_WIDTH  = 32;
 const NET_HEIGHT = 64;
 const CMP_WIDTH  = 200;
 const CMP_HEIGHT = 32;
+const TXT_HEIGHT = 16;
 const XOFFSET    = DX+CMP_WIDTH;
 const YOFFSET    = DY+NET_HEIGHT;
 const XSLOT      = DX+NET_WIDTH;
@@ -23,16 +24,16 @@ Vue.component( 'tenant_network',
     },
     computed: {
       t: function(index) {
-        return DY;
+        return DY + TXT_HEIGHT;
       },
       l: function(index) {
-        return DX+CMP_WIDTH + this.index * (DX+NET_WIDTH);
+        return CMP_WIDTH + (this.index+1) * (DX+NET_WIDTH) - 1;
       },
       w: function(index) {
         return NET_WIDTH;
       },
       h: function(index) {
-        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT);
+        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT) - TXT_HEIGHT;
       }
     },
     template: `
@@ -59,16 +60,16 @@ Vue.component( 'tenant_network2',
     },
     computed: {
       t: function(index) {
-        return DY;
+        return DY + TXT_HEIGHT;
       },
       l: function(index) {
-        return DX+CMP_WIDTH + this.model.networks.length * (DX+NET_WIDTH);
+        return CMP_WIDTH + (this.model.networks.length+1) * (DX+NET_WIDTH) - 1;
       },
       w: function(index) {
         return NET_WIDTH;
       },
       h: function(index) {
-        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT);
+        return DY+NET_HEIGHT + this.model.components.length * (DY+CMP_HEIGHT) - TXT_HEIGHT;
       }
     },
     template: `
@@ -80,7 +81,7 @@ Vue.component( 'tenant_network2',
           left:        l + 'px',
           width:       w + 'px',
           height:      h + 'px'
-        }">new network
+        }"><input class='label' value='new' readonly></div>
       </div>`
   }
 )

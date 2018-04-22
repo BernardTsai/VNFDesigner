@@ -29,6 +29,7 @@ input, select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  border-radius: 0px;
 }
 
 input, select {
@@ -106,7 +107,8 @@ textare:focus, select:focus, input:focus {
   width:       320px;
   bottom:      0px;
   top:         56px;
-  overflow-y: scroll;
+  overflow-y:  auto;
+  overflow-x:  hidden;
 
   border-right: 1px solid grey;
   min-height:   544px;
@@ -137,6 +139,7 @@ textare:focus, select:focus, input:focus {
   border-right:             1px solid grey;
   border-top:               1px solid grey;
   margin-left:              1px;
+  font-size:                11px;
 }
 
 #appheader .tabs div.active {
@@ -178,7 +181,8 @@ textare:focus, select:focus, input:focus {
 }
 
 #appnavigation .list .item {
-  display:       block;
+  display:       flex;
+  width:         auto;
   padding-left:  8px;
   height:        32px;
   line-height:   32px;
@@ -190,10 +194,9 @@ textare:focus, select:focus, input:focus {
 }
 
 #appnavigation .list .item .name {
-  display:       inline-block;
+  flex:          1;
   height:        32px;
   line-height:   32px;
-  width:         280px;
   text-overflow: ellipsis;
   overflow:      hidden;
   white-space:   nowrap;
